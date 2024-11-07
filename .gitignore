@@ -1,3 +1,4 @@
 # Ignore all .h5 and .pkl files
 *.h5
 *.pkl
+data/
