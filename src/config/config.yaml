@@ -1,0 +1,18 @@
+name_of_run: Baseline
+data_params:
+  resolved_folder_path: "/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/"
+  selected_features:
+    - Frequency
+    - Amplitude
+    - FrequencyDerivative
+    - SNR
+    - Eccentricity
+  test_seed_val: 1
+  val_seed_val: 1
+  training_batch_size: 128
+  inference_batch_size: 128
+training_params:
+  num_epochs: 100
+  lr: 0.001
+test: True
+  
