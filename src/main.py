@@ -6,8 +6,8 @@ import argparse
 from model import MultiTaskClassifier, MultiTaskClassifier_L
 from data import load_config, load_data
 from train import train_model
-from eval import evaluate_model, plot_confusion_matrix, plot_histogram, plot_roc, compute_metrics, plot_loss
-
+from eval import evaluate_model, plot_confusion_matrix, plot_histogram, plot_roc, compute_metrics, plot_loss, plot_se_sp_vs_threshold,plot_confusion_matrix_multiclass
+from sklearn.metrics import confusion_matrix
 def main(config_path):
     # Load configuration from the YAML file.
     config = load_config(config_path)
@@ -24,7 +24,6 @@ def main(config_path):
     )
     logger = logging.getLogger()
 
-    # Also log to console.
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
@@ -41,7 +40,7 @@ def main(config_path):
     model_instance = MultiTaskClassifier_L(input_dim, num_model_classes)
     logger.info("Model defined with input dimension %d and %d model classes.", input_dim, num_model_classes)
 
-    # Check config flag to either train or load a pre-trained model.
+
     if config.get("test", False):
         # Skip training; load a saved model for evaluation.
         best_model_path = os.path.join("models", "best_multi_task_classifier.pth")
@@ -71,40 +70,34 @@ def main(config_path):
                 "train_loss": training_results["train_loss_history"]
             })
 
-    loss_history_path = os.path.join("models", f"train_val_loss_history_{name_of_run}.csv")
-    loss_history_df.to_csv(loss_history_path, index=False)
-    logger.info("Training and Validation loss history saved to %s", loss_history_path)
+        loss_history_path = os.path.join("models", f"train_val_loss_history_{name_of_run}.csv")
+        loss_history_df.to_csv(loss_history_path, index=False)
+        logger.info("Training and Validation loss history saved to %s", loss_history_path)
     # Evaluate on the validation set.
-    fig_dir = os.path.join("figure", name_of_run)
+    fig_dir = os.path.join("figures", name_of_run)
     os.makedirs(fig_dir, exist_ok=True)
     # Evaluate on the validation set.
     binary_preds, binary_true, model_preds, model_true = evaluate_model(model_instance, val_loader)
-    metrics = compute_metrics(binary_preds, binary_true, threshold=0.5)
-
-    # Log and print metrics.
-    logger.info("Validation Metrics:")
-    logger.info("Accuracy: %.4f", metrics["accuracy"])
-    logger.info("Sensitivity: %.4f", metrics["sensitivity"])
-    logger.info("Specificity: %.4f", metrics["specificity"])
-    logger.info("Confusion Matrix:\n%s", metrics["confusion_matrix"])
-
-    print("Validation Metrics:")
-    print("Accuracy:", metrics["accuracy"])
-    print("Sensitivity:", metrics["sensitivity"])
-    print("Specificity:", metrics["specificity"])
-    print("Confusion Matrix:\n", metrics["confusion_matrix"])
+    metrics = compute_metrics(binary_preds, binary_true, threshold=0.5, logger=logger)
 
     # Plot and save evaluation graphs.
     plot_confusion_matrix(metrics["confusion_matrix"], save_dir=fig_dir)
     plot_histogram(binary_preds, binary_true, save_dir=fig_dir)
     plot_roc(binary_preds, binary_true, save_dir=fig_dir)
-
-    loss_history_path = os.path.join("models", f"train_val_loss_history_{name_of_run}.csv")
-    loss_history_df = pd.read_csv(loss_history_path)
-    train_loss_history = loss_history_df['train_loss']
-    val_loss_history = loss_history_df['val_loss']
+    plot_se_sp_vs_threshold(binary_preds, binary_true, save_dir=fig_dir)
     
-    plot_loss(train_loss_history, val_loss_history, save_dir=fig_dir)
+    cm_model = confusion_matrix(model_true, model_preds)
+    # Plot multi-class confusion matrix.
+    plot_confusion_matrix_multiclass(cm_model, class_names=list(model_encoder.classes_), save_dir=fig_dir)
+
+    try:
+        loss_history_path = os.path.join("models", f"train_val_loss_history_{name_of_run}.csv")
+        loss_history_df = pd.read_csv(loss_history_path)
+        train_loss_history = loss_history_df['train_loss']
+        val_loss_history = loss_history_df['val_loss']
+        plot_loss(train_loss_history, val_loss_history, save_dir=fig_dir)
+    except Exception as e:
+        logger.error("Could not plot loss curve: %s", e)
 
     logger.info("Evaluation completed successfully in main.py.")
 
