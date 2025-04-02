@@ -1,0 +1,37 @@
+2025-03-20 15:10:10,317 - INFO - Starting multi-task script in main.py.
+2025-03-20 15:10:10,318 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': True,
+                 'inference_batch_size': 128,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency',
+                                       'Amplitude',
+                                       'FrequencyDerivative',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'use_custom_weights': False,
+                 'val_seed_val': 1},
+ 'name_of_run': 'Baseline_ecc_0_only',
+ 'test': True,
+ 'training_params': {'lr': 0.001, 'num_epochs': 100}}
+2025-03-20 15:10:11,144 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-03-20 15:10:11,146 - INFO - Model defined with input dimension 5 and 11 model classes.
+2025-03-20 15:10:11,150 - INFO - Test flag is True. Loaded model from models/best_multi_task_classifier_Baseline_ecc_0_only.pth
+2025-03-20 15:10:11,193 - INFO - Feature: Frequency, Average Saliency: 0.0099, Parameters Impact: 7.5743, Parameters Std: 9.4454
+2025-03-20 15:10:11,193 - INFO - Feature: Amplitude, Average Saliency: 0.0034, Parameters Impact: 2.6255, Parameters Std: 3.6785
+2025-03-20 15:10:11,193 - INFO - Feature: FrequencyDerivative, Average Saliency: 0.1829, Parameters Impact: 139.7193, Parameters Std: 158.8352
+2025-03-20 15:10:11,193 - INFO - Feature: SNR, Average Saliency: 0.0025, Parameters Impact: 1.9345, Parameters Std: 2.3348
+2025-03-20 15:10:11,193 - INFO - Feature: Eccentricity, Average Saliency: 0.0013, Parameters Impact: 1.0000, Parameters Std: 1.0036
+2025-03-20 15:10:11,670 - INFO - Validation Metrics:
+2025-03-20 15:10:11,670 - INFO - Accuracy: 0.9962
+2025-03-20 15:10:11,670 - INFO - Precision: 0.0000
+2025-03-20 15:10:11,670 - INFO - Recall (Sensitivity): 0.0000
+2025-03-20 15:10:11,670 - INFO - Specificity: 1.0000
+2025-03-20 15:10:11,670 - INFO - F1 Score: 0.0000
+2025-03-20 15:10:11,670 - INFO - ROC AUC: 0.9295
+2025-03-20 15:10:11,670 - INFO - Balanced Accuracy: 0.5000
+2025-03-20 15:10:11,670 - INFO - Confusion Matrix:
+[[26681     0]
+ [  103     0]]
+2025-03-20 15:10:12,477 - INFO - Evaluation completed successfully in main.py.

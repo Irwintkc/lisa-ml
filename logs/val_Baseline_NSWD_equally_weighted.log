@@ -1,0 +1,37 @@
+2025-03-19 18:35:41,353 - INFO - Starting multi-task script in main.py.
+2025-03-19 18:35:41,353 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': False,
+                 'inference_batch_size': 128,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency',
+                                       'Amplitude',
+                                       'FrequencyDerivative',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'use_custom_weights': True,
+                 'val_seed_val': 1},
+ 'name_of_run': 'Baseline_NSWD_equally_weighted',
+ 'test': True,
+ 'training_params': {'lr': 0.001, 'num_epochs': 100}}
+2025-03-19 18:35:41,831 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-03-19 18:35:41,832 - INFO - Model defined with input dimension 5 and 11 model classes.
+2025-03-19 18:35:41,835 - INFO - Test flag is True. Loaded model from models/best_multi_task_classifier_Baseline_NSWD_equally_weighted.pth
+2025-03-19 18:35:41,865 - INFO - Feature: Frequency, Average Saliency: 0.0062
+2025-03-19 18:35:41,865 - INFO - Feature: Amplitude, Average Saliency: 0.0019
+2025-03-19 18:35:41,865 - INFO - Feature: FrequencyDerivative, Average Saliency: 0.1856
+2025-03-19 18:35:41,865 - INFO - Feature: SNR, Average Saliency: 0.0014
+2025-03-19 18:35:41,865 - INFO - Feature: Eccentricity, Average Saliency: 0.0061
+2025-03-19 18:35:42,263 - INFO - Validation Metrics:
+2025-03-19 18:35:42,263 - INFO - Accuracy: 0.9966
+2025-03-19 18:35:42,263 - INFO - Precision: 1.0000
+2025-03-19 18:35:42,263 - INFO - Recall (Sensitivity): 0.7102
+2025-03-19 18:35:42,263 - INFO - Specificity: 1.0000
+2025-03-19 18:35:42,263 - INFO - F1 Score: 0.8305
+2025-03-19 18:35:42,263 - INFO - ROC AUC: 0.9838
+2025-03-19 18:35:42,263 - INFO - Balanced Accuracy: 0.8551
+2025-03-19 18:35:42,263 - INFO - Confusion Matrix:
+[[26682     0]
+ [   91   223]]
+2025-03-19 18:35:42,917 - INFO - Evaluation completed successfully in main.py.

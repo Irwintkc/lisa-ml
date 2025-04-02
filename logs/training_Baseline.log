@@ -1,0 +1,252 @@
+2025-03-19 17:26:08,916 - INFO - Starting multi-task script in main.py.
+2025-03-19 17:26:08,916 - INFO - Loaded configuration settings:
+{'data_params': {'inference_batch_size': 128,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency',
+                                       'Amplitude',
+                                       'FrequencyDerivative',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'val_seed_val': 1},
+ 'name_of_run': 'Baseline',
+ 'test': False,
+ 'training_params': {'lr': 0.001, 'num_epochs': 100}}
+2025-03-19 17:26:09,408 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-03-19 17:26:09,409 - INFO - Model defined with input dimension 5 and 11 model classes.
+2025-03-19 17:26:09,848 - INFO - Starting training for 100 epochs.
+2025-03-19 17:26:14,312 - INFO - Epoch [1/100] - Training Loss: 2.1428
+2025-03-19 17:26:14,670 - INFO - Epoch [1/100] - Validation Loss: 2.0396
+2025-03-19 17:26:14,673 - INFO - Epoch [1] - Best model updated (Validation Loss: 2.0396)
+2025-03-19 17:26:19,340 - INFO - Epoch [2/100] - Training Loss: 2.0633
+2025-03-19 17:26:19,592 - INFO - Epoch [2/100] - Validation Loss: 2.0221
+2025-03-19 17:26:19,593 - INFO - Epoch [2] - Best model updated (Validation Loss: 2.0221)
+2025-03-19 17:26:23,805 - INFO - Epoch [3/100] - Training Loss: 2.0411
+2025-03-19 17:26:24,059 - INFO - Epoch [3/100] - Validation Loss: 2.0132
+2025-03-19 17:26:24,060 - INFO - Epoch [3] - Best model updated (Validation Loss: 2.0132)
+2025-03-19 17:26:28,252 - INFO - Epoch [4/100] - Training Loss: 2.0315
+2025-03-19 17:26:28,511 - INFO - Epoch [4/100] - Validation Loss: 2.0045
+2025-03-19 17:26:28,512 - INFO - Epoch [4] - Best model updated (Validation Loss: 2.0045)
+2025-03-19 17:26:33,116 - INFO - Epoch [5/100] - Training Loss: 2.0255
+2025-03-19 17:26:33,390 - INFO - Epoch [5/100] - Validation Loss: 2.0031
+2025-03-19 17:26:33,392 - INFO - Epoch [5] - Best model updated (Validation Loss: 2.0031)
+2025-03-19 17:26:37,798 - INFO - Epoch [6/100] - Training Loss: 2.0215
+2025-03-19 17:26:38,058 - INFO - Epoch [6/100] - Validation Loss: 2.0011
+2025-03-19 17:26:38,060 - INFO - Epoch [6] - Best model updated (Validation Loss: 2.0011)
+2025-03-19 17:26:42,165 - INFO - Epoch [7/100] - Training Loss: 2.0163
+2025-03-19 17:26:42,423 - INFO - Epoch [7/100] - Validation Loss: 1.9952
+2025-03-19 17:26:42,425 - INFO - Epoch [7] - Best model updated (Validation Loss: 1.9952)
+2025-03-19 17:26:46,528 - INFO - Epoch [8/100] - Training Loss: 2.0140
+2025-03-19 17:26:46,795 - INFO - Epoch [8/100] - Validation Loss: 1.9936
+2025-03-19 17:26:46,797 - INFO - Epoch [8] - Best model updated (Validation Loss: 1.9936)
+2025-03-19 17:26:51,105 - INFO - Epoch [9/100] - Training Loss: 2.0108
+2025-03-19 17:26:51,363 - INFO - Epoch [9/100] - Validation Loss: 1.9929
+2025-03-19 17:26:51,365 - INFO - Epoch [9] - Best model updated (Validation Loss: 1.9929)
+2025-03-19 17:26:55,600 - INFO - Epoch [10/100] - Training Loss: 2.0087
+2025-03-19 17:26:55,864 - INFO - Epoch [10/100] - Validation Loss: 1.9844
+2025-03-19 17:26:55,865 - INFO - Epoch [10] - Best model updated (Validation Loss: 1.9844)
+2025-03-19 17:27:00,007 - INFO - Epoch [11/100] - Training Loss: 2.0060
+2025-03-19 17:27:00,270 - INFO - Epoch [11/100] - Validation Loss: 1.9966
+2025-03-19 17:27:04,397 - INFO - Epoch [12/100] - Training Loss: 2.0041
+2025-03-19 17:27:04,651 - INFO - Epoch [12/100] - Validation Loss: 1.9947
+2025-03-19 17:27:08,845 - INFO - Epoch [13/100] - Training Loss: 2.0052
+2025-03-19 17:27:09,102 - INFO - Epoch [13/100] - Validation Loss: 1.9858
+2025-03-19 17:27:13,204 - INFO - Epoch [14/100] - Training Loss: 2.0007
+2025-03-19 17:27:13,462 - INFO - Epoch [14/100] - Validation Loss: 1.9841
+2025-03-19 17:27:13,463 - INFO - Epoch [14] - Best model updated (Validation Loss: 1.9841)
+2025-03-19 17:27:17,579 - INFO - Epoch [15/100] - Training Loss: 1.9999
+2025-03-19 17:27:17,829 - INFO - Epoch [15/100] - Validation Loss: 1.9781
+2025-03-19 17:27:17,831 - INFO - Epoch [15] - Best model updated (Validation Loss: 1.9781)
+2025-03-19 17:27:21,982 - INFO - Epoch [16/100] - Training Loss: 1.9985
+2025-03-19 17:27:22,242 - INFO - Epoch [16/100] - Validation Loss: 1.9862
+2025-03-19 17:27:26,371 - INFO - Epoch [17/100] - Training Loss: 1.9958
+2025-03-19 17:27:26,640 - INFO - Epoch [17/100] - Validation Loss: 1.9808
+2025-03-19 17:27:30,772 - INFO - Epoch [18/100] - Training Loss: 1.9959
+2025-03-19 17:27:31,022 - INFO - Epoch [18/100] - Validation Loss: 1.9734
+2025-03-19 17:27:31,023 - INFO - Epoch [18] - Best model updated (Validation Loss: 1.9734)
+2025-03-19 17:27:35,142 - INFO - Epoch [19/100] - Training Loss: 1.9928
+2025-03-19 17:27:35,401 - INFO - Epoch [19/100] - Validation Loss: 1.9675
+2025-03-19 17:27:35,402 - INFO - Epoch [19] - Best model updated (Validation Loss: 1.9675)
+2025-03-19 17:27:39,500 - INFO - Epoch [20/100] - Training Loss: 1.9910
+2025-03-19 17:27:39,760 - INFO - Epoch [20/100] - Validation Loss: 1.9881
+2025-03-19 17:27:43,933 - INFO - Epoch [21/100] - Training Loss: 1.9893
+2025-03-19 17:27:44,186 - INFO - Epoch [21/100] - Validation Loss: 1.9959
+2025-03-19 17:27:48,303 - INFO - Epoch [22/100] - Training Loss: 1.9878
+2025-03-19 17:27:48,547 - INFO - Epoch [22/100] - Validation Loss: 1.9661
+2025-03-19 17:27:48,548 - INFO - Epoch [22] - Best model updated (Validation Loss: 1.9661)
+2025-03-19 17:27:52,646 - INFO - Epoch [23/100] - Training Loss: 1.9873
+2025-03-19 17:27:52,899 - INFO - Epoch [23/100] - Validation Loss: 1.9618
+2025-03-19 17:27:52,900 - INFO - Epoch [23] - Best model updated (Validation Loss: 1.9618)
+2025-03-19 17:27:57,008 - INFO - Epoch [24/100] - Training Loss: 1.9847
+2025-03-19 17:27:57,268 - INFO - Epoch [24/100] - Validation Loss: 1.9667
+2025-03-19 17:28:01,354 - INFO - Epoch [25/100] - Training Loss: 1.9861
+2025-03-19 17:28:01,601 - INFO - Epoch [25/100] - Validation Loss: 1.9615
+2025-03-19 17:28:01,602 - INFO - Epoch [25] - Best model updated (Validation Loss: 1.9615)
+2025-03-19 17:28:05,728 - INFO - Epoch [26/100] - Training Loss: 1.9839
+2025-03-19 17:28:05,990 - INFO - Epoch [26/100] - Validation Loss: 1.9640
+2025-03-19 17:28:10,077 - INFO - Epoch [27/100] - Training Loss: 1.9845
+2025-03-19 17:28:10,331 - INFO - Epoch [27/100] - Validation Loss: 1.9616
+2025-03-19 17:28:14,423 - INFO - Epoch [28/100] - Training Loss: 1.9847
+2025-03-19 17:28:14,688 - INFO - Epoch [28/100] - Validation Loss: 1.9745
+2025-03-19 17:28:18,731 - INFO - Epoch [29/100] - Training Loss: 1.9833
+2025-03-19 17:28:18,984 - INFO - Epoch [29/100] - Validation Loss: 1.9695
+2025-03-19 17:28:23,059 - INFO - Epoch [30/100] - Training Loss: 1.9837
+2025-03-19 17:28:23,322 - INFO - Epoch [30/100] - Validation Loss: 1.9622
+2025-03-19 17:28:27,494 - INFO - Epoch [31/100] - Training Loss: 1.9837
+2025-03-19 17:28:27,758 - INFO - Epoch [31/100] - Validation Loss: 1.9684
+2025-03-19 17:28:31,874 - INFO - Epoch [32/100] - Training Loss: 1.9824
+2025-03-19 17:28:32,131 - INFO - Epoch [32/100] - Validation Loss: 1.9701
+2025-03-19 17:28:36,156 - INFO - Epoch [33/100] - Training Loss: 1.9815
+2025-03-19 17:28:36,434 - INFO - Epoch [33/100] - Validation Loss: 1.9559
+2025-03-19 17:28:36,435 - INFO - Epoch [33] - Best model updated (Validation Loss: 1.9559)
+2025-03-19 17:28:40,646 - INFO - Epoch [34/100] - Training Loss: 1.9826
+2025-03-19 17:28:40,901 - INFO - Epoch [34/100] - Validation Loss: 1.9598
+2025-03-19 17:28:44,988 - INFO - Epoch [35/100] - Training Loss: 1.9798
+2025-03-19 17:28:45,248 - INFO - Epoch [35/100] - Validation Loss: 1.9507
+2025-03-19 17:28:45,250 - INFO - Epoch [35] - Best model updated (Validation Loss: 1.9507)
+2025-03-19 17:28:49,360 - INFO - Epoch [36/100] - Training Loss: 1.9811
+2025-03-19 17:28:49,616 - INFO - Epoch [36/100] - Validation Loss: 1.9642
+2025-03-19 17:28:53,707 - INFO - Epoch [37/100] - Training Loss: 1.9823
+2025-03-19 17:28:53,960 - INFO - Epoch [37/100] - Validation Loss: 1.9584
+2025-03-19 17:28:58,343 - INFO - Epoch [38/100] - Training Loss: 1.9804
+2025-03-19 17:28:58,592 - INFO - Epoch [38/100] - Validation Loss: 1.9558
+2025-03-19 17:29:02,722 - INFO - Epoch [39/100] - Training Loss: 1.9810
+2025-03-19 17:29:02,980 - INFO - Epoch [39/100] - Validation Loss: 1.9621
+2025-03-19 17:29:07,087 - INFO - Epoch [40/100] - Training Loss: 1.9801
+2025-03-19 17:29:07,341 - INFO - Epoch [40/100] - Validation Loss: 1.9587
+2025-03-19 17:29:11,552 - INFO - Epoch [41/100] - Training Loss: 1.9819
+2025-03-19 17:29:11,800 - INFO - Epoch [41/100] - Validation Loss: 1.9527
+2025-03-19 17:29:15,887 - INFO - Epoch [42/100] - Training Loss: 1.9805
+2025-03-19 17:29:16,143 - INFO - Epoch [42/100] - Validation Loss: 1.9637
+2025-03-19 17:29:20,227 - INFO - Epoch [43/100] - Training Loss: 1.9815
+2025-03-19 17:29:20,480 - INFO - Epoch [43/100] - Validation Loss: 1.9652
+2025-03-19 17:29:24,556 - INFO - Epoch [44/100] - Training Loss: 1.9786
+2025-03-19 17:29:24,809 - INFO - Epoch [44/100] - Validation Loss: 1.9659
+2025-03-19 17:29:28,878 - INFO - Epoch [45/100] - Training Loss: 1.9821
+2025-03-19 17:29:29,133 - INFO - Epoch [45/100] - Validation Loss: 1.9616
+2025-03-19 17:29:33,225 - INFO - Epoch [46/100] - Training Loss: 1.9823
+2025-03-19 17:29:33,472 - INFO - Epoch [46/100] - Validation Loss: 1.9608
+2025-03-19 17:29:37,523 - INFO - Epoch [47/100] - Training Loss: 1.9837
+2025-03-19 17:29:37,766 - INFO - Epoch [47/100] - Validation Loss: 1.9603
+2025-03-19 17:29:41,825 - INFO - Epoch [48/100] - Training Loss: 1.9836
+2025-03-19 17:29:42,083 - INFO - Epoch [48/100] - Validation Loss: 1.9627
+2025-03-19 17:29:46,176 - INFO - Epoch [49/100] - Training Loss: 1.9830
+2025-03-19 17:29:46,443 - INFO - Epoch [49/100] - Validation Loss: 1.9633
+2025-03-19 17:29:50,535 - INFO - Epoch [50/100] - Training Loss: 1.9836
+2025-03-19 17:29:50,789 - INFO - Epoch [50/100] - Validation Loss: 1.9695
+2025-03-19 17:29:54,896 - INFO - Epoch [51/100] - Training Loss: 1.9821
+2025-03-19 17:29:55,144 - INFO - Epoch [51/100] - Validation Loss: 1.9696
+2025-03-19 17:29:59,340 - INFO - Epoch [52/100] - Training Loss: 1.9819
+2025-03-19 17:29:59,599 - INFO - Epoch [52/100] - Validation Loss: 1.9688
+2025-03-19 17:30:03,676 - INFO - Epoch [53/100] - Training Loss: 1.9814
+2025-03-19 17:30:03,937 - INFO - Epoch [53/100] - Validation Loss: 1.9667
+2025-03-19 17:30:08,018 - INFO - Epoch [54/100] - Training Loss: 1.9840
+2025-03-19 17:30:08,277 - INFO - Epoch [54/100] - Validation Loss: 1.9702
+2025-03-19 17:30:12,382 - INFO - Epoch [55/100] - Training Loss: 1.9829
+2025-03-19 17:30:12,642 - INFO - Epoch [55/100] - Validation Loss: 1.9581
+2025-03-19 17:30:16,739 - INFO - Epoch [56/100] - Training Loss: 1.9843
+2025-03-19 17:30:16,999 - INFO - Epoch [56/100] - Validation Loss: 1.9679
+2025-03-19 17:30:21,073 - INFO - Epoch [57/100] - Training Loss: 1.9807
+2025-03-19 17:30:21,321 - INFO - Epoch [57/100] - Validation Loss: 1.9636
+2025-03-19 17:30:25,391 - INFO - Epoch [58/100] - Training Loss: 1.9819
+2025-03-19 17:30:25,640 - INFO - Epoch [58/100] - Validation Loss: 1.9614
+2025-03-19 17:30:29,727 - INFO - Epoch [59/100] - Training Loss: 1.9830
+2025-03-19 17:30:29,981 - INFO - Epoch [59/100] - Validation Loss: 1.9600
+2025-03-19 17:30:34,162 - INFO - Epoch [60/100] - Training Loss: 1.9840
+2025-03-19 17:30:34,426 - INFO - Epoch [60/100] - Validation Loss: 1.9562
+2025-03-19 17:30:38,500 - INFO - Epoch [61/100] - Training Loss: 1.9830
+2025-03-19 17:30:38,785 - INFO - Epoch [61/100] - Validation Loss: 1.9742
+2025-03-19 17:30:42,858 - INFO - Epoch [62/100] - Training Loss: 1.9830
+2025-03-19 17:30:43,125 - INFO - Epoch [62/100] - Validation Loss: 1.9659
+2025-03-19 17:30:47,206 - INFO - Epoch [63/100] - Training Loss: 1.9831
+2025-03-19 17:30:47,462 - INFO - Epoch [63/100] - Validation Loss: 1.9551
+2025-03-19 17:30:51,578 - INFO - Epoch [64/100] - Training Loss: 1.9839
+2025-03-19 17:30:51,825 - INFO - Epoch [64/100] - Validation Loss: 1.9631
+2025-03-19 17:30:55,909 - INFO - Epoch [65/100] - Training Loss: 1.9818
+2025-03-19 17:30:56,178 - INFO - Epoch [65/100] - Validation Loss: 1.9675
+2025-03-19 17:31:00,360 - INFO - Epoch [66/100] - Training Loss: 1.9820
+2025-03-19 17:31:00,617 - INFO - Epoch [66/100] - Validation Loss: 1.9640
+2025-03-19 17:31:04,704 - INFO - Epoch [67/100] - Training Loss: 1.9814
+2025-03-19 17:31:04,953 - INFO - Epoch [67/100] - Validation Loss: 1.9513
+2025-03-19 17:31:09,017 - INFO - Epoch [68/100] - Training Loss: 1.9792
+2025-03-19 17:31:09,273 - INFO - Epoch [68/100] - Validation Loss: 1.9669
+2025-03-19 17:31:13,317 - INFO - Epoch [69/100] - Training Loss: 1.9810
+2025-03-19 17:31:13,566 - INFO - Epoch [69/100] - Validation Loss: 1.9649
+2025-03-19 17:31:17,607 - INFO - Epoch [70/100] - Training Loss: 1.9799
+2025-03-19 17:31:17,872 - INFO - Epoch [70/100] - Validation Loss: 1.9545
+2025-03-19 17:31:21,844 - INFO - Epoch [71/100] - Training Loss: 1.9788
+2025-03-19 17:31:22,095 - INFO - Epoch [71/100] - Validation Loss: 1.9540
+2025-03-19 17:31:26,133 - INFO - Epoch [72/100] - Training Loss: 1.9793
+2025-03-19 17:31:26,379 - INFO - Epoch [72/100] - Validation Loss: 1.9644
+2025-03-19 17:31:30,411 - INFO - Epoch [73/100] - Training Loss: 1.9808
+2025-03-19 17:31:30,663 - INFO - Epoch [73/100] - Validation Loss: 1.9558
+2025-03-19 17:31:34,770 - INFO - Epoch [74/100] - Training Loss: 1.9845
+2025-03-19 17:31:35,023 - INFO - Epoch [74/100] - Validation Loss: 1.9667
+2025-03-19 17:31:39,087 - INFO - Epoch [75/100] - Training Loss: 1.9820
+2025-03-19 17:31:39,334 - INFO - Epoch [75/100] - Validation Loss: 1.9579
+2025-03-19 17:31:43,456 - INFO - Epoch [76/100] - Training Loss: 1.9849
+2025-03-19 17:31:43,720 - INFO - Epoch [76/100] - Validation Loss: 1.9634
+2025-03-19 17:31:47,875 - INFO - Epoch [77/100] - Training Loss: 1.9839
+2025-03-19 17:31:48,131 - INFO - Epoch [77/100] - Validation Loss: 1.9674
+2025-03-19 17:31:52,288 - INFO - Epoch [78/100] - Training Loss: 1.9842
+2025-03-19 17:31:52,536 - INFO - Epoch [78/100] - Validation Loss: 1.9597
+2025-03-19 17:31:56,616 - INFO - Epoch [79/100] - Training Loss: 1.9828
+2025-03-19 17:31:56,865 - INFO - Epoch [79/100] - Validation Loss: 1.9547
+2025-03-19 17:32:00,937 - INFO - Epoch [80/100] - Training Loss: 1.9813
+2025-03-19 17:32:01,184 - INFO - Epoch [80/100] - Validation Loss: 1.9744
+2025-03-19 17:32:05,234 - INFO - Epoch [81/100] - Training Loss: 1.9817
+2025-03-19 17:32:05,491 - INFO - Epoch [81/100] - Validation Loss: 1.9635
+2025-03-19 17:32:09,604 - INFO - Epoch [82/100] - Training Loss: 1.9791
+2025-03-19 17:32:09,855 - INFO - Epoch [82/100] - Validation Loss: 1.9805
+2025-03-19 17:32:13,886 - INFO - Epoch [83/100] - Training Loss: 1.9787
+2025-03-19 17:32:14,140 - INFO - Epoch [83/100] - Validation Loss: 1.9548
+2025-03-19 17:32:18,174 - INFO - Epoch [84/100] - Training Loss: 1.9832
+2025-03-19 17:32:18,431 - INFO - Epoch [84/100] - Validation Loss: 1.9575
+2025-03-19 17:32:22,457 - INFO - Epoch [85/100] - Training Loss: 1.9805
+2025-03-19 17:32:22,709 - INFO - Epoch [85/100] - Validation Loss: 1.9631
+2025-03-19 17:32:26,894 - INFO - Epoch [86/100] - Training Loss: 1.9806
+2025-03-19 17:32:27,148 - INFO - Epoch [86/100] - Validation Loss: 1.9551
+2025-03-19 17:32:31,231 - INFO - Epoch [87/100] - Training Loss: 1.9797
+2025-03-19 17:32:31,484 - INFO - Epoch [87/100] - Validation Loss: 1.9582
+2025-03-19 17:32:35,443 - INFO - Epoch [88/100] - Training Loss: 1.9784
+2025-03-19 17:32:35,698 - INFO - Epoch [88/100] - Validation Loss: 1.9703
+2025-03-19 17:32:39,656 - INFO - Epoch [89/100] - Training Loss: 1.9813
+2025-03-19 17:32:39,913 - INFO - Epoch [89/100] - Validation Loss: 1.9538
+2025-03-19 17:32:43,994 - INFO - Epoch [90/100] - Training Loss: 1.9802
+2025-03-19 17:32:44,250 - INFO - Epoch [90/100] - Validation Loss: 1.9535
+2025-03-19 17:32:48,289 - INFO - Epoch [91/100] - Training Loss: 1.9823
+2025-03-19 17:32:48,534 - INFO - Epoch [91/100] - Validation Loss: 1.9595
+2025-03-19 17:32:52,601 - INFO - Epoch [92/100] - Training Loss: 1.9815
+2025-03-19 17:32:52,853 - INFO - Epoch [92/100] - Validation Loss: 1.9587
+2025-03-19 17:32:56,934 - INFO - Epoch [93/100] - Training Loss: 1.9790
+2025-03-19 17:32:57,187 - INFO - Epoch [93/100] - Validation Loss: 1.9557
+2025-03-19 17:33:01,247 - INFO - Epoch [94/100] - Training Loss: 1.9810
+2025-03-19 17:33:01,494 - INFO - Epoch [94/100] - Validation Loss: 1.9647
+2025-03-19 17:33:05,453 - INFO - Epoch [95/100] - Training Loss: 1.9784
+2025-03-19 17:33:05,708 - INFO - Epoch [95/100] - Validation Loss: 1.9528
+2025-03-19 17:33:09,891 - INFO - Epoch [96/100] - Training Loss: 1.9800
+2025-03-19 17:33:10,143 - INFO - Epoch [96/100] - Validation Loss: 1.9633
+2025-03-19 17:33:14,195 - INFO - Epoch [97/100] - Training Loss: 1.9774
+2025-03-19 17:33:14,446 - INFO - Epoch [97/100] - Validation Loss: 1.9625
+2025-03-19 17:33:18,459 - INFO - Epoch [98/100] - Training Loss: 1.9801
+2025-03-19 17:33:18,709 - INFO - Epoch [98/100] - Validation Loss: 1.9625
+2025-03-19 17:33:22,673 - INFO - Epoch [99/100] - Training Loss: 1.9824
+2025-03-19 17:33:22,924 - INFO - Epoch [99/100] - Validation Loss: 1.9500
+2025-03-19 17:33:22,926 - INFO - Epoch [99] - Best model updated (Validation Loss: 1.9500)
+2025-03-19 17:33:27,012 - INFO - Epoch [100/100] - Training Loss: 1.9808
+2025-03-19 17:33:27,263 - INFO - Epoch [100/100] - Validation Loss: 1.9542
+2025-03-19 17:33:27,265 - INFO - Best model loaded from models/best_multi_task_classifier_Baseline.pth
+2025-03-19 17:33:27,268 - INFO - Training and Validation loss history saved to models/loss_history/train_val_loss_history_Baseline.csv
+2025-03-19 17:33:27,616 - INFO - Validation Metrics:
+2025-03-19 17:33:27,616 - INFO - Accuracy: 0.9967
+2025-03-19 17:33:27,616 - INFO - Precision: 1.0000
+2025-03-19 17:33:27,616 - INFO - Recall (Sensitivity): 0.7134
+2025-03-19 17:33:27,616 - INFO - Specificity: 1.0000
+2025-03-19 17:33:27,616 - INFO - F1 Score: 0.8327
+2025-03-19 17:33:27,616 - INFO - ROC AUC: 0.9835
+2025-03-19 17:33:27,616 - INFO - Balanced Accuracy: 0.8567
+2025-03-19 17:33:27,616 - INFO - Confusion Matrix:
+[[26682     0]
+ [   90   224]]
+2025-03-19 17:33:28,304 - INFO - Evaluation completed successfully in main.py.

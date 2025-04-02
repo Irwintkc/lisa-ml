@@ -1,12 +1,17 @@
-name_of_run: Baseline
+name_of_run: Baseline_class_1_300_weights_log_focal_loss
 data_params:
   resolved_folder_path: "/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/"
+  fim_folder_path: "/Users/irwin/Documents/GitHub/lisa-ml/data/fims/"
   selected_features:
-    - Frequency
-    - Amplitude
-    - FrequencyDerivative
+    - Frequency_mHz
+    - Amplitude_log10
+    - FrequencyDerivative_log10
     - SNR
     - Eccentricity
+  n_samples_class0: 1
+  n_samples_class1: 300
+  ecc_0_only: False
+  use_custom_weights: True
   test_seed_val: 1
   val_seed_val: 1
   training_batch_size: 128
@@ -14,5 +19,8 @@ data_params:
 training_params:
   num_epochs: 100
   lr: 0.001
-test: True
+  focal_loss:
+    gamma: 2.0
+    alpha: 0.25
+test: False
   

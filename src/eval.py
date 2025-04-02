@@ -1,7 +1,10 @@
 import os
+import time
 import torch
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 from sklearn.metrics import (
     confusion_matrix, accuracy_score, precision_score, recall_score,
     f1_score, roc_auc_score, balanced_accuracy_score, roc_curve, auc
@@ -15,25 +18,63 @@ def evaluate_model(model, data_loader):
     model.eval()
     binary_preds = []
     binary_true = []
-    model_preds = []
+    overall_best_model = []
+    best_submodel = []
     model_true = []
     
     with torch.no_grad():
-        for inputs, binary_labels, model_labels in data_loader:
+        for batch in data_loader:
+            if len(batch) == 4:
+                inputs, binary_labels, model_labels, _ = batch
+            else:
+                inputs, binary_labels, model_labels = batch
+            
             out_binary, out_model = model(inputs)
             # Get probabilities for the binary task.
             binary_prob = out_binary.detach().cpu().numpy().flatten()
             # For multi-class, get predicted class.
-            preds_model = out_model.argmax(dim=1).detach().cpu().numpy()
+            preds_models = out_model.detach().cpu().numpy()
+            model1 = preds_models[:, :5]   
+            model2 = preds_models[:, 5:9]   
+            model3 = preds_models[:, 9:11]  
+            sum_model1 = model1.sum(axis=1) 
+            sum_model2 = model2.sum(axis=1)
+            sum_model3 = model3.sum(axis=1)
+
+            group_sums = np.stack([sum_model1, sum_model2, sum_model3], axis=1)  # shape: (batch_size, 3)
+    
+            # Determine which model group has the highest overall probability for each sample.
+            # 0 -> Model 1, 1 -> Model 2, 2 -> Model 3.
+            best_group_indices = group_sums.argmax(axis=1)
+            
+            overall_best_model_batch = np.where(best_group_indices == 0, "Model 1",
+                                np.where(best_group_indices == 1, "Model 2", "Model 3"))
+            
+            best_submodel_batch = []
+            for i in range(preds_models.shape[0]):
+                if best_group_indices[i] == 0:
+                    sub_idx = model1[i].argmax()  
+                    best_submodel_batch.append(f"1.{sub_idx}")  
+                elif best_group_indices[i] == 1:
+                    sub_idx = model2[i].argmax()  
+                    best_submodel_batch.append(f"2.{sub_idx+1}") 
+                else:
+                    sub_idx = model3[i].argmax()  
+                    best_submodel_batch.append(f"3.{sub_idx}")  
+    
+            best_submodel_batch = np.char.add("Model ", best_submodel_batch)
             
             binary_preds.extend(binary_prob)
             binary_true.extend(binary_labels.detach().cpu().numpy().flatten())
-            model_preds.extend(preds_model)
+            overall_best_model.extend(overall_best_model_batch)
+            best_submodel.extend(best_submodel_batch)
             model_true.extend(model_labels.detach().cpu().numpy())
-    
-    return (np.array(binary_preds), np.array(binary_true),
-            np.array(model_preds), np.array(model_true))
 
+    return (np.array(binary_preds), np.array(binary_true),
+            np.array(overall_best_model), np.array(best_submodel), np.array(model_true))
+    
+    
+    
 def compute_metrics(binary_preds, binary_true, threshold=0.5, logger=None):
     """
     Computes various classification metrics for binary predictions and logs/prints them if a logger is provided.
@@ -101,16 +142,6 @@ def compute_metrics(binary_preds, binary_true, threshold=0.5, logger=None):
         logger.info("ROC AUC: %.4f", roc_auc)
         logger.info("Balanced Accuracy: %.4f", balanced_acc)
         logger.info("Confusion Matrix:\n%s", cm)
-        
-        print("Validation Metrics:")
-        print("Accuracy:", accuracy)
-        print("Precision:", precision)
-        print("Recall (Sensitivity):", recall)
-        print("Specificity:", specificity)
-        print("F1 Score:", f1)
-        print("ROC AUC:", roc_auc)
-        print("Balanced Accuracy:", balanced_acc)
-        print("Confusion Matrix:\n", cm)
     
     return metrics
 
@@ -273,7 +304,7 @@ def plot_se_sp_vs_threshold(binary_preds, binary_true, save_dir=None):
         plt.show()
     plt.close()
 
-def plot_confusion_matrix_multiclass(cm, class_names, save_dir=None):
+def plot_confusion_matrix_multiclass(cm, class_names, save_dir=None, filename=None):
     """
     Plots the multi-class confusion matrix and saves it to the specified directory if provided.
     
@@ -281,6 +312,8 @@ def plot_confusion_matrix_multiclass(cm, class_names, save_dir=None):
       cm: Confusion matrix array.
       class_names: List of class names.
       save_dir: Optional directory where the plot is saved.
+      filename: Optional filename for the saved plot. If not provided and save_dir is given,
+                a filename with a timestamp is generated.
     """
     plt.figure(figsize=(8,6))
     plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
@@ -300,9 +333,41 @@ def plot_confusion_matrix_multiclass(cm, class_names, save_dir=None):
     
     if save_dir:
         os.makedirs(save_dir, exist_ok=True)
-        save_path = os.path.join(save_dir, "confusion_matrix_model.png")
+        # Generate a unique filename if one is not provided.
+        if not filename:
+            timestamp = time.strftime("%Y%m%d-%H%M%S")
+            filename = f"confusion_matrix_model_{timestamp}.png"
+        save_path = os.path.join(save_dir, filename)
         plt.savefig(save_path)
         print(f"Multi-class confusion matrix saved to {save_path}")
     else:
         plt.show()
     plt.close()
+    
+    
+def discretize_series(series):
+    return series.apply(lambda x: round(x * 5) / 5)
+
+def plot_corner(data, features, hue_col, save_path=None, palette=None):
+    """
+    Generates a half corner plot (pairplot) of the specified features, colored by the given hue column.
+    
+    Args:
+      data (pd.DataFrame): DataFrame containing the data to plot.
+      features (list): List of feature column names to include in the pairplot.
+      hue_col (str): Column name in data to use for coloring.
+      save_path (str, optional): Path to save the plot image.
+      palette (dict, optional): Dictionary mapping discrete hue values to RGBA colors.
+    """
+    pairplot_fig = sns.pairplot(data, vars=features, hue=hue_col, diag_kind="kde", corner=True, palette=palette)
+    if save_path:
+        pairplot_fig.savefig(save_path)
+        plt.close()
+    else:
+        plt.show()
+
+def plot_corner_predicted(data, features, save_path=None, palette=None):
+    return plot_corner(data, features, hue_col="Predicted_Class", save_path=save_path, palette=palette)
+
+def plot_corner_true(data, features, save_path=None, palette=None):
+    return plot_corner(data, features, hue_col="True_Class", save_path=save_path, palette=palette)
