@@ -91,6 +91,7 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
     use_custom_weights = (len(first_batch) == 4)
     alpha = focal_loss_config.get("alpha", 0.25)
     gamma = focal_loss_config.get("gamma", 2.0)
+    
     # Use FocalLoss for the binary classification task.
     if use_custom_weights:
         criterion_binary = FocalLoss(alpha=alpha, gamma=gamma, reduction='none')
@@ -100,6 +101,8 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
         criterion_model = nn.CrossEntropyLoss()
     
     optimizer = optim.AdamW(model.parameters(), lr=lr)
+    # Define a learning rate scheduler that steps down the LR every 10 epochs.
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
     
     if logger is None:
         logger = print
@@ -140,9 +143,14 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
             optimizer.step()
             running_loss += loss.item()
             epoch_bar.set_postfix(loss=f"{loss.item():.4f}")
+        
+        # Step the learning rate scheduler at the end of each epoch.
+        scheduler.step()
+        
         avg_train_loss = running_loss / len(train_loader)
         train_loss_history.append(avg_train_loss)
-        logger("Epoch [{}/{}] - Training Loss: {:.4f}".format(epoch+1, num_epochs, avg_train_loss))
+        logger("Epoch [{}/{}] - Training Loss: {:.4f} - Learning Rate: {:.6f}".format(
+            epoch+1, num_epochs, avg_train_loss, optimizer.param_groups[0]['lr']))
         
         if val_loader is not None:
             model.eval()
