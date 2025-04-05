@@ -1,0 +1,46 @@
+2025-04-05 13:25:27,942 - INFO - Starting multi-task script in main.py.
+2025-04-05 13:25:27,942 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': False,
+                 'fim_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/fims/',
+                 'inference_batch_size': 128,
+                 'n_samples_class0': 1,
+                 'n_samples_class1': 300,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency_mHz',
+                                       'Amplitude_log10',
+                                       'FrequencyDerivative_log10',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'use_custom_weights': True,
+                 'val_seed_val': 1},
+ 'evaluation_threshold': 0.5,
+ 'name_of_run': 'Baseline_class_1_300_weights_log_focal_loss',
+ 'test': True,
+ 'training_params': {'focal_loss': {'alpha': 0.25, 'gamma': 2.0},
+                     'lr': 0.001,
+                     'num_epochs': 100}}
+2025-04-05 13:27:10,691 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-04-05 13:27:10,694 - INFO - Model defined with input dimension 5 and 11 model classes.
+2025-04-05 13:27:10,697 - INFO - Test flag is True. Loaded model from models/best_multi_task_classifier_Baseline_class_1_300_weights_log_focal_loss.pth
+2025-04-05 13:27:10,727 - INFO - Feature: Frequency_mHz, Average Saliency: 0.0015, Parameters Impact: 2.2318, Parameters Std: 6.2401
+2025-04-05 13:27:10,727 - INFO - Feature: Amplitude_log10, Average Saliency: 0.0007, Parameters Impact: 1.0000, Parameters Std: 2.1086
+2025-04-05 13:27:10,727 - INFO - Feature: FrequencyDerivative_log10, Average Saliency: 0.0023, Parameters Impact: 3.5557, Parameters Std: 7.4961
+2025-04-05 13:27:10,727 - INFO - Feature: SNR, Average Saliency: 0.0020, Parameters Impact: 3.1205, Parameters Std: 9.0254
+2025-04-05 13:27:10,727 - INFO - Feature: Eccentricity, Average Saliency: 0.0071, Parameters Impact: 10.7439, Parameters Std: 28.7389
+2025-04-05 13:27:12,652 - INFO - Validation Metrics:
+2025-04-05 13:27:12,652 - INFO - Accuracy: 0.7298
+2025-04-05 13:27:12,652 - INFO - Precision: 0.9999
+2025-04-05 13:27:12,652 - INFO - Recall (Sensitivity): 0.5476
+2025-04-05 13:27:12,652 - INFO - Specificity: 0.9999
+2025-04-05 13:27:12,652 - INFO - F1 Score: 0.7077
+2025-04-05 13:27:12,652 - INFO - ROC AUC: 0.8095
+2025-04-05 13:27:12,652 - INFO - Balanced Accuracy: 0.7738
+2025-04-05 13:27:12,652 - INFO - Confusion Matrix:
+[[45868     4]
+ [30755 37227]]
+2025-04-05 13:27:55,046 - INFO - Corner plot for predicted classes saved to figures/Baseline_class_1_300_weights_log_focal_loss/corner_plot_predicted.png
+2025-04-05 13:28:35,802 - INFO - Corner plot for true classes saved to figures/Baseline_class_1_300_weights_log_focal_loss/corner_plot_true.png
+2025-04-05 13:29:00,900 - INFO - Corner plot for true class 1 (Prediction_Status) saved to figures/Baseline_class_1_300_weights_log_focal_loss/corner_plot_class1_status.png
+2025-04-05 13:29:17,973 - INFO - Evaluation completed successfully in main.py.

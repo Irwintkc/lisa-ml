@@ -145,7 +145,6 @@ def load_data(config):
     n_samples_class1 = data_config["n_samples_class1"]
     fim_data_path = data_config["fim_folder_path"]
     
-    
     df = compile_data_from_folder(resolved_folder_path)
     # Transformations
     df['Frequency_mHz'] = df['Frequency'] * 1000
@@ -153,44 +152,44 @@ def load_data(config):
     df['EclipticLatitude_sin'] = np.sin(df['EclipticLatitude'])
     df['Amplitude_log10'] = np.log10(df['Amplitude'])
     df['Inclination_cos'] = np.cos(df['Inclination'])
-
+    
     # Remove the original columns if they're no longer needed.
     cols_to_remove = ['Frequency', 'FrequencyDerivative', 'EclipticLatitude', 'Amplitude', 'Inclination']
     df.drop(columns=cols_to_remove, inplace=True)
-    
-    
     
     df['Class'] = df['Name'].str.extract(r'MW_(DWD|NSWD)')
     df = df.dropna(subset=selected_features + ['Class', 'Model'])
     
     if ecc_0_only and "Eccentricity" in selected_features:
         df = df[df["Eccentricity"] == 0]
-
-    
     
     binary_encoder = LabelEncoder()
     df['Class_enc'] = binary_encoder.fit_transform(df['Class'])
     
-    #
     model_encoder = LabelEncoder()
     df['Model_enc'] = model_encoder.fit_transform(df['Model'])
     
-    #Generate samples from FIMs
+    # Generate samples from FIMs if requested
     if n_samples_class0 and n_samples_class1 is not None:
         loaded_fim_data = load_fim_data(fim_data_path)
         sample_df = generate_sample_dataframe(df, loaded_fim_data, n_samples_class0, n_samples_class1)
         
         df['Source'] = 'Original'
         sample_df['Source'] = 'Sample'
-
+    
         df = pd.concat([df, sample_df], ignore_index=True)
         df = df.groupby('Name').apply(fill_with_original).reset_index(drop=True)
     
-    # Custom Weighting Function Here
+    # Custom Weighting Function
     if use_custom_weights:
         df['Weights'] = df.groupby('Name')['Name'].transform(lambda x: 1.0/len(x) if len(x) > 1 else 1.0)
-        
-        
+    
+    # Always define sample_weights: if custom weights are not used, assign weight 1 to every sample.
+    if use_custom_weights:
+        sample_weights = df['Weights']
+    else:
+        sample_weights = pd.Series(np.ones(len(df)), index=df.index)
+    
     encoder_dir = os.path.join("models", "encoders")
     os.makedirs(encoder_dir, exist_ok=True)
     with open(os.path.join(encoder_dir, "binary_encoder.pkl"), "wb") as f:
@@ -202,7 +201,6 @@ def load_data(config):
     X = df[selected_features]
     y_binary = df['Class_enc']
     y_model = df['Model_enc']
-    sample_weights = df['Weights']
     
     X_train_val, X_test, y_binary_train_val, y_binary_test, y_model_train_val, y_model_test, weights_train_val, weights_test = train_test_split(
         X, y_binary, y_model, sample_weights, test_size=0.2, random_state=test_seed_val
@@ -213,12 +211,10 @@ def load_data(config):
         X_train_val, y_binary_train_val, y_model_train_val, weights_train_val, test_size=0.2, random_state=val_seed_val
     )
     
-    
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_val_scaled = scaler.transform(X_val)
     X_test_scaled = scaler.transform(X_test)
-    
     
     test_set_df = pd.DataFrame(X_test_scaled, columns=X.columns)
     test_set_df['Class'] = y_binary_test.values
@@ -227,7 +223,6 @@ def load_data(config):
     test_set_save_path = os.path.join("data", "test_set", f"test_set_seed_{test_seed_val}_{name_of_run}.csv")
     os.makedirs(os.path.dirname(test_set_save_path), exist_ok=True)
     test_set_df.to_csv(test_set_save_path, index=False)
-    
     
     X_train_tensor = torch.tensor(X_train_scaled, dtype=torch.float32)
     X_val_tensor = torch.tensor(X_val_scaled, dtype=torch.float32)
@@ -238,7 +233,7 @@ def load_data(config):
     
     weights_train_tensor = torch.tensor(weights_train.values, dtype=torch.float32)
     weights_val_tensor = torch.tensor(weights_val.values, dtype=torch.float32)
-   
+    
     if use_custom_weights:
         train_dataset = TensorDataset(X_train_tensor, y_binary_train_tensor, y_model_train_tensor, weights_train_tensor)
         val_dataset   = TensorDataset(X_val_tensor, y_binary_val_tensor, y_model_val_tensor, weights_val_tensor)

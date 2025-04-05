@@ -98,11 +98,10 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
         criterion_model = nn.CrossEntropyLoss(reduction='none')
     else:
         criterion_binary = FocalLoss(alpha=alpha, gamma=gamma, reduction='mean')
-        criterion_model = nn.CrossEntropyLoss()
+        criterion_model = nn.CrossEntropyLoss() 
     
     optimizer = optim.AdamW(model.parameters(), lr=lr)
-    # Define a learning rate scheduler that steps down the LR every 10 epochs.
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.1)
     
     if logger is None:
         logger = print

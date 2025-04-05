@@ -5,6 +5,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+import scipy.special
 from sklearn.metrics import (
     confusion_matrix, accuracy_score, precision_score, recall_score,
     f1_score, roc_auc_score, balanced_accuracy_score, roc_curve, auc
@@ -32,14 +33,17 @@ def evaluate_model(model, data_loader):
             out_binary, out_model = model(inputs)
             # Get probabilities for the binary task.
             binary_prob = out_binary.detach().cpu().numpy().flatten()
-            # For multi-class, get predicted class.
+
             preds_models = out_model.detach().cpu().numpy()
             model1 = preds_models[:, :5]   
             model2 = preds_models[:, 5:9]   
-            model3 = preds_models[:, 9:11]  
-            sum_model1 = model1.sum(axis=1) 
-            sum_model2 = model2.sum(axis=1)
-            sum_model3 = model3.sum(axis=1)
+            model3 = preds_models[:, 9:11]
+            model1_prob = scipy.special.softmax(model1, axis=1)  # Shape: (batch_size, 5), each row sums to 1.
+            model2_prob = scipy.special.softmax(model2, axis=1)  # Shape: (batch_size, 4), each row sums to 1.
+            model3_prob = scipy.special.softmax(model3, axis=1)  # Shape: (batch_size, 2), each row sums to 1.  
+            sum_model1 = model1_prob.sum(axis=1) 
+            sum_model2 = model2_prob.sum(axis=1)
+            sum_model3 = model3_prob.sum(axis=1)
 
             group_sums = np.stack([sum_model1, sum_model2, sum_model3], axis=1)  # shape: (batch_size, 3)
     
@@ -371,3 +375,13 @@ def plot_corner_predicted(data, features, save_path=None, palette=None):
 
 def plot_corner_true(data, features, save_path=None, palette=None):
     return plot_corner(data, features, hue_col="True_Class", save_path=save_path, palette=palette)
+
+def plot_metrics(metric_history, metric_name, save_path=save_path):
+    plt.figure(figsize=(8, 5))
+    plt.plot(metric_history, marker='o', label=metric_name)
+    plt.xlabel("Epoch")
+    plt.ylabel(metric_name)
+    plt.title(f"{metric_name} vs Epoch")
+    plt.legend()
+    plt.savefig(save_path)
+    plt.close()

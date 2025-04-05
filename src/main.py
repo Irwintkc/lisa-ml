@@ -24,7 +24,8 @@ from eval import (
     plot_se_sp_vs_threshold,
     plot_confusion_matrix_multiclass,
     plot_corner,
-    discretize_series
+    discretize_series,
+    plot_metrics
 )
 from sklearn.metrics import confusion_matrix
 
@@ -34,7 +35,7 @@ def main(config_path):
     config = load_config(config_path)
     name_of_run = config["name_of_run"]
     focal_loss_config = config["training_params"].get("focal_loss", {})
-
+    evalutaion_threshold = config["evaluation_threshold"]
     # Configure logging.
     log_dir = os.path.join("logs")
     os.makedirs(log_dir, exist_ok=True)
@@ -103,7 +104,16 @@ def main(config_path):
         os.makedirs(os.path.dirname(loss_history_path), exist_ok=True)
         loss_history_df.to_csv(loss_history_path, index=False)
         logger.info("Training and Validation loss history saved to %s", loss_history_path)
-
+        se_history_path = os.path.join(fig_dir, "se_history.png")
+        plot_metrics(training_results["sensitivity_history"], "Sensitivity", se_history_path)
+        sp_history_path = os.path.join(fig_dir, "sp_history.png")
+        plot_metrics(training_results["specificity_history"], "Specificity", sp_history_path)
+        acc_history_path = os.path.join(fig_dir, "acc_history.png")
+        plot_metrics(training_results["accuracy_history"], "Accuracy", acc_history_path)
+        mcc_history_path = os.path.join(fig_dir, "mcc_history.png")
+        plot_metrics(training_results["mcc_history"], "MCC", mcc_history_path)
+        auc_history_path = os.path.join(fig_dir, "auc_history.png")
+        plot_metrics(training_results["auc_history"], "AUC ROC", auc_history_path)
     # Compute saliency.
     avg_saliency, params_impact, params_std = compute_saliency(model_instance, val_loader.dataset, num_samples=10)
     selected_features = config["data_params"]["selected_features"]
@@ -154,10 +164,14 @@ def main(config_path):
 
     X_val_df["Predicted_Class"] = binary_preds
     X_val_df["True_Class"] = binary_true
-
+    X_val_df["Predicted_Class_binary"] = (X_val_df["Predicted_Class"] > evalutaion_threshold).astype(int)
     X_val_df["Predicted_Class"] = discretize_series(X_val_df["Predicted_Class"])
     X_val_df["True_Class"] = discretize_series(X_val_df["True_Class"])
-
+    X_val_df["Prediction_Status"] = np.where(
+    X_val_df["Predicted_Class_binary"] == X_val_df["True_Class"],
+    "Correct",
+    "Wrong"
+    )
     bins = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
     alpha_values = [0.3, 0.5, 0.7, 0.85, 0.95, 1.0]
 
@@ -175,6 +189,19 @@ def main(config_path):
     plot_corner(X_val_df, selected_features, hue_col="True_Class", save_path=true_plot_path, palette=custom_palette)
     logger.info("Corner plot for true classes saved to %s", true_plot_path)
 
+    prediction_status_palette = {"Correct": "green", "Wrong": "red"}
+    df_class1 = X_val_df[X_val_df["True_Class"] == 1]
+    
+    class1_status_plot_path = os.path.join(fig_dir, "corner_plot_class1_status.png")
+    plot_corner(df_class1, selected_features, hue_col="Prediction_Status", 
+                save_path=class1_status_plot_path, palette=prediction_status_palette)
+    logger.info("Corner plot for true class 1 (Prediction_Status) saved to %s", class1_status_plot_path)
+    
+    df_class0 = X_val_df[X_val_df["True_Class"] == 0]
+    class0_status_plot_path = os.path.join(fig_dir, "corner_plot_class0_status.png")
+    plot_corner(df_class0, selected_features, hue_col="Prediction_Status", 
+                save_path=class0_status_plot_path, palette=prediction_status_palette)
+    
     logger.info("Evaluation completed successfully in main.py.")
 
 

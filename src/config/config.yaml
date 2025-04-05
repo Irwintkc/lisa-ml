@@ -22,5 +22,6 @@ training_params:
   focal_loss:
     gamma: 2.0
     alpha: 0.25
-test: False
+evaluation_threshold: 0.5
+test: True
   

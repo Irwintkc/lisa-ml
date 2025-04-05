@@ -1,37 +1,31 @@
-2025-03-28 15:13:17,698 - INFO - Starting multi-task script in main.py.
-2025-03-28 15:13:17,699 - INFO - Loaded configuration settings:
+2025-04-05 13:10:00,093 - INFO - Starting multi-task script in main.py.
+2025-04-05 13:10:00,093 - INFO - Loaded configuration settings:
 {'data_params': {'ecc_0_only': False,
+                 'fim_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/fims/',
                  'inference_batch_size': 128,
+                 'n_samples_class0': None,
+                 'n_samples_class1': None,
                  'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
-                 'selected_features': ['Frequency',
-                                       'Amplitude',
-                                       'FrequencyDerivative',
+                 'selected_features': ['Frequency_mHz',
+                                       'Amplitude_log10',
+                                       'FrequencyDerivative_log10',
                                        'SNR',
                                        'Eccentricity'],
                  'test_seed_val': 1,
                  'training_batch_size': 128,
                  'use_custom_weights': False,
                  'val_seed_val': 1},
+ 'evaluation_threshold': 0.5,
  'name_of_run': 'Baseline',
  'test': True,
- 'training_params': {'lr': 0.001, 'num_epochs': 100}}
-2025-03-28 15:13:18,518 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
-2025-03-28 15:13:18,520 - INFO - Model defined with input dimension 5 and 11 model classes.
-2025-03-28 15:13:18,523 - INFO - Test flag is True. Loaded model from models/best_multi_task_classifier_Baseline.pth
-2025-03-28 15:13:18,570 - INFO - Feature: Frequency, Average Saliency: 0.0006, Parameters Impact: 2.1490, Parameters Std: 4.4001
-2025-03-28 15:13:18,570 - INFO - Feature: Amplitude, Average Saliency: 0.0011, Parameters Impact: 3.6657, Parameters Std: 10.8165
-2025-03-28 15:13:18,570 - INFO - Feature: FrequencyDerivative, Average Saliency: 0.0066, Parameters Impact: 22.4932, Parameters Std: 43.0515
-2025-03-28 15:13:18,570 - INFO - Feature: SNR, Average Saliency: 0.0011, Parameters Impact: 3.7416, Parameters Std: 8.7417
-2025-03-28 15:13:18,570 - INFO - Feature: Eccentricity, Average Saliency: 0.0003, Parameters Impact: 1.0000, Parameters Std: 2.8088
-2025-03-28 15:13:19,165 - INFO - Validation Metrics:
-2025-03-28 15:13:19,165 - INFO - Accuracy: 0.9967
-2025-03-28 15:13:19,166 - INFO - Precision: 1.0000
-2025-03-28 15:13:19,166 - INFO - Recall (Sensitivity): 0.7134
-2025-03-28 15:13:19,166 - INFO - Specificity: 1.0000
-2025-03-28 15:13:19,166 - INFO - F1 Score: 0.8327
-2025-03-28 15:13:19,166 - INFO - ROC AUC: 0.9835
-2025-03-28 15:13:19,166 - INFO - Balanced Accuracy: 0.8567
-2025-03-28 15:13:19,166 - INFO - Confusion Matrix:
-[[26682     0]
- [   90   224]]
-2025-03-28 15:13:20,237 - INFO - Evaluation completed successfully in main.py.
+ 'training_params': {'focal_loss': {'alpha': 0.25, 'gamma': 2.0},
+                     'lr': 0.001,
+                     'num_epochs': 100}}
+2025-04-05 13:10:00,731 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-04-05 13:10:00,733 - INFO - Model defined with input dimension 5 and 11 model classes.
+2025-04-05 13:10:00,735 - INFO - Test flag is True. Loaded model from models/best_multi_task_classifier_Baseline.pth
+2025-04-05 13:10:00,764 - INFO - Feature: Frequency_mHz, Average Saliency: 0.0070, Parameters Impact: 3.8288, Parameters Std: 9.5983
+2025-04-05 13:10:00,764 - INFO - Feature: Amplitude_log10, Average Saliency: 0.0029, Parameters Impact: 1.5835, Parameters Std: 3.3148
+2025-04-05 13:10:00,764 - INFO - Feature: FrequencyDerivative_log10, Average Saliency: 0.0101, Parameters Impact: 5.5396, Parameters Std: 14.6117
+2025-04-05 13:10:00,764 - INFO - Feature: SNR, Average Saliency: 0.0062, Parameters Impact: 3.4003, Parameters Std: 6.7014
+2025-04-05 13:10:00,764 - INFO - Feature: Eccentricity, Average Saliency: 0.0018, Parameters Impact: 1.0000, Parameters Std: 1.6761
