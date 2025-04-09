@@ -1,0 +1,138 @@
+2025-04-06 20:09:39,148 - INFO - Starting multi-task script in main.py.
+2025-04-06 20:09:39,148 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': False,
+                 'fim_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/fims/',
+                 'inference_batch_size': 128,
+                 'n_samples_class0': None,
+                 'n_samples_class1': None,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency_mHz',
+                                       'Amplitude_log10',
+                                       'FrequencyDerivative_log10',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'use_custom_weights': False,
+                 'val_seed_val': 1},
+ 'evaluation_threshold': 0.5,
+ 'model': 'Multi_L',
+ 'name_of_run': 'Baseline_log_weighted_learningrate0.05',
+ 'test': False,
+ 'training_params': {'focal_loss': {'alpha': 0.25, 'gamma': 2.0},
+                     'lr': 0.05,
+                     'num_epochs': 100}}
+2025-04-06 20:09:39,596 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-04-06 20:09:39,597 - INFO - Model defined: MultiTaskClassifier_L with input dimension 5 and 11 model classes.
+2025-04-06 20:09:40,060 - INFO - Starting training for 100 epochs.
+2025-04-06 20:09:44,412 - INFO - Epoch [1/100] - Training Loss: 2.1001 - Learning Rate: 0.050000
+2025-04-06 20:09:44,673 - INFO - Epoch [1/100] - Validation Loss: 2.0867
+2025-04-06 20:09:44,724 - INFO - Epoch [1/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:09:44,727 - INFO - Epoch [1] - Best model updated (Validation Loss: 2.0867)
+2025-04-06 20:09:48,892 - INFO - Epoch [2/100] - Training Loss: 2.0923 - Learning Rate: 0.050000
+2025-04-06 20:09:49,142 - INFO - Epoch [2/100] - Validation Loss: 2.0879
+2025-04-06 20:09:49,191 - INFO - Epoch [2/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:09:53,205 - INFO - Epoch [3/100] - Training Loss: 2.0925 - Learning Rate: 0.050000
+2025-04-06 20:09:53,471 - INFO - Epoch [3/100] - Validation Loss: 2.0861
+2025-04-06 20:09:53,521 - INFO - Epoch [3/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:09:53,522 - INFO - Epoch [3] - Best model updated (Validation Loss: 2.0861)
+2025-04-06 20:09:57,482 - INFO - Epoch [4/100] - Training Loss: 2.0923 - Learning Rate: 0.050000
+2025-04-06 20:09:57,731 - INFO - Epoch [4/100] - Validation Loss: 2.0876
+2025-04-06 20:09:57,781 - INFO - Epoch [4/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:01,840 - INFO - Epoch [5/100] - Training Loss: 2.0925 - Learning Rate: 0.050000
+2025-04-06 20:10:02,108 - INFO - Epoch [5/100] - Validation Loss: 2.0902
+2025-04-06 20:10:02,157 - INFO - Epoch [5/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:06,092 - INFO - Epoch [6/100] - Training Loss: 2.0920 - Learning Rate: 0.050000
+2025-04-06 20:10:06,361 - INFO - Epoch [6/100] - Validation Loss: 2.0877
+2025-04-06 20:10:06,411 - INFO - Epoch [6/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:10,325 - INFO - Epoch [7/100] - Training Loss: 2.0927 - Learning Rate: 0.050000
+2025-04-06 20:10:10,572 - INFO - Epoch [7/100] - Validation Loss: 2.0863
+2025-04-06 20:10:10,621 - INFO - Epoch [7/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:14,530 - INFO - Epoch [8/100] - Training Loss: 2.0924 - Learning Rate: 0.050000
+2025-04-06 20:10:14,824 - INFO - Epoch [8/100] - Validation Loss: 2.0858
+2025-04-06 20:10:14,873 - INFO - Epoch [8/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:14,874 - INFO - Epoch [8] - Best model updated (Validation Loss: 2.0858)
+2025-04-06 20:10:19,050 - INFO - Epoch [9/100] - Training Loss: 2.0926 - Learning Rate: 0.050000
+2025-04-06 20:10:19,332 - INFO - Epoch [9/100] - Validation Loss: 2.0890
+2025-04-06 20:10:19,383 - INFO - Epoch [9/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:23,826 - INFO - Epoch [10/100] - Training Loss: 2.0923 - Learning Rate: 0.050000
+2025-04-06 20:10:24,107 - INFO - Epoch [10/100] - Validation Loss: 2.0880
+2025-04-06 20:10:24,157 - INFO - Epoch [10/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:28,341 - INFO - Epoch [11/100] - Training Loss: 2.0926 - Learning Rate: 0.050000
+2025-04-06 20:10:28,597 - INFO - Epoch [11/100] - Validation Loss: 2.0897
+2025-04-06 20:10:28,646 - INFO - Epoch [11/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:32,783 - INFO - Epoch [12/100] - Training Loss: 2.0923 - Learning Rate: 0.050000
+2025-04-06 20:10:33,058 - INFO - Epoch [12/100] - Validation Loss: 2.0863
+2025-04-06 20:10:33,108 - INFO - Epoch [12/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:37,302 - INFO - Epoch [13/100] - Training Loss: 2.0924 - Learning Rate: 0.050000
+2025-04-06 20:10:37,584 - INFO - Epoch [13/100] - Validation Loss: 2.0857
+2025-04-06 20:10:37,633 - INFO - Epoch [13/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:37,635 - INFO - Epoch [13] - Best model updated (Validation Loss: 2.0857)
+2025-04-06 20:10:41,788 - INFO - Epoch [14/100] - Training Loss: 2.0925 - Learning Rate: 0.050000
+2025-04-06 20:10:42,048 - INFO - Epoch [14/100] - Validation Loss: 2.0870
+2025-04-06 20:10:42,098 - INFO - Epoch [14/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:46,426 - INFO - Epoch [15/100] - Training Loss: 2.0923 - Learning Rate: 0.050000
+2025-04-06 20:10:46,729 - INFO - Epoch [15/100] - Validation Loss: 2.0881
+2025-04-06 20:10:46,786 - INFO - Epoch [15/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:50,984 - INFO - Epoch [16/100] - Training Loss: 2.0922 - Learning Rate: 0.050000
+2025-04-06 20:10:51,248 - INFO - Epoch [16/100] - Validation Loss: 2.0880
+2025-04-06 20:10:51,297 - INFO - Epoch [16/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:55,344 - INFO - Epoch [17/100] - Training Loss: 2.0922 - Learning Rate: 0.050000
+2025-04-06 20:10:55,621 - INFO - Epoch [17/100] - Validation Loss: 2.0894
+2025-04-06 20:10:55,672 - INFO - Epoch [17/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:10:59,786 - INFO - Epoch [18/100] - Training Loss: 2.0920 - Learning Rate: 0.050000
+2025-04-06 20:11:00,051 - INFO - Epoch [18/100] - Validation Loss: 2.0855
+2025-04-06 20:11:00,101 - INFO - Epoch [18/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:00,102 - INFO - Epoch [18] - Best model updated (Validation Loss: 2.0855)
+2025-04-06 20:11:04,203 - INFO - Epoch [19/100] - Training Loss: 2.0928 - Learning Rate: 0.050000
+2025-04-06 20:11:04,464 - INFO - Epoch [19/100] - Validation Loss: 2.0875
+2025-04-06 20:11:04,513 - INFO - Epoch [19/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:08,578 - INFO - Epoch [20/100] - Training Loss: 2.0924 - Learning Rate: 0.050000
+2025-04-06 20:11:08,852 - INFO - Epoch [20/100] - Validation Loss: 2.0872
+2025-04-06 20:11:08,902 - INFO - Epoch [20/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:13,325 - INFO - Epoch [21/100] - Training Loss: 2.0923 - Learning Rate: 0.050000
+2025-04-06 20:11:13,613 - INFO - Epoch [21/100] - Validation Loss: 2.0863
+2025-04-06 20:11:13,663 - INFO - Epoch [21/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:17,889 - INFO - Epoch [22/100] - Training Loss: 2.0921 - Learning Rate: 0.050000
+2025-04-06 20:11:18,156 - INFO - Epoch [22/100] - Validation Loss: 2.0862
+2025-04-06 20:11:18,206 - INFO - Epoch [22/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:22,502 - INFO - Epoch [23/100] - Training Loss: 2.0919 - Learning Rate: 0.050000
+2025-04-06 20:11:22,766 - INFO - Epoch [23/100] - Validation Loss: 2.0893
+2025-04-06 20:11:22,816 - INFO - Epoch [23/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:27,235 - INFO - Epoch [24/100] - Training Loss: 2.0921 - Learning Rate: 0.050000
+2025-04-06 20:11:27,517 - INFO - Epoch [24/100] - Validation Loss: 2.0856
+2025-04-06 20:11:27,567 - INFO - Epoch [24/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:31,889 - INFO - Epoch [25/100] - Training Loss: 2.0923 - Learning Rate: 0.050000
+2025-04-06 20:11:32,168 - INFO - Epoch [25/100] - Validation Loss: 2.0873
+2025-04-06 20:11:32,218 - INFO - Epoch [25/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:36,300 - INFO - Epoch [26/100] - Training Loss: 2.0922 - Learning Rate: 0.050000
+2025-04-06 20:11:36,570 - INFO - Epoch [26/100] - Validation Loss: 2.0856
+2025-04-06 20:11:36,620 - INFO - Epoch [26/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:40,767 - INFO - Epoch [27/100] - Training Loss: 2.0924 - Learning Rate: 0.050000
+2025-04-06 20:11:41,022 - INFO - Epoch [27/100] - Validation Loss: 2.0862
+2025-04-06 20:11:41,071 - INFO - Epoch [27/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:45,096 - INFO - Epoch [28/100] - Training Loss: 2.0921 - Learning Rate: 0.050000
+2025-04-06 20:11:45,362 - INFO - Epoch [28/100] - Validation Loss: 2.0888
+2025-04-06 20:11:45,412 - INFO - Epoch [28/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:49,609 - INFO - Epoch [29/100] - Training Loss: 2.0928 - Learning Rate: 0.050000
+2025-04-06 20:11:49,864 - INFO - Epoch [29/100] - Validation Loss: 2.0876
+2025-04-06 20:11:49,913 - INFO - Epoch [29/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:54,591 - INFO - Epoch [30/100] - Training Loss: 2.0924 - Learning Rate: 0.050000
+2025-04-06 20:11:54,856 - INFO - Epoch [30/100] - Validation Loss: 2.0882
+2025-04-06 20:11:54,907 - INFO - Epoch [30/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:11:59,018 - INFO - Epoch [31/100] - Training Loss: 2.0924 - Learning Rate: 0.050000
+2025-04-06 20:11:59,273 - INFO - Epoch [31/100] - Validation Loss: 2.0879
+2025-04-06 20:11:59,323 - INFO - Epoch [31/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:12:03,470 - INFO - Epoch [32/100] - Training Loss: 2.0922 - Learning Rate: 0.050000
+2025-04-06 20:12:03,740 - INFO - Epoch [32/100] - Validation Loss: 2.0890
+2025-04-06 20:12:03,790 - INFO - Epoch [32/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:12:07,952 - INFO - Epoch [33/100] - Training Loss: 2.0922 - Learning Rate: 0.050000
+2025-04-06 20:12:08,213 - INFO - Epoch [33/100] - Validation Loss: 2.0862
+2025-04-06 20:12:08,263 - INFO - Epoch [33/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:12:12,802 - INFO - Epoch [34/100] - Training Loss: 2.0926 - Learning Rate: 0.050000
+2025-04-06 20:12:13,092 - INFO - Epoch [34/100] - Validation Loss: 2.0897
+2025-04-06 20:12:13,142 - INFO - Epoch [34/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:12:17,918 - INFO - Epoch [35/100] - Training Loss: 2.0921 - Learning Rate: 0.050000
+2025-04-06 20:12:18,196 - INFO - Epoch [35/100] - Validation Loss: 2.0884
+2025-04-06 20:12:18,246 - INFO - Epoch [35/100] Metrics: Sensitivity: 0.0000, Specificity: 1.0000, Accuracy: 0.9884, MCC: 0.0000, AUC ROC: 0.5000
+2025-04-06 20:12:22,772 - INFO - Epoch [36/100] - Training Loss: 2.0923 - Learning Rate: 0.050000

@@ -30,12 +30,16 @@ from eval import (
 from sklearn.metrics import confusion_matrix
 
 
+
 def main(config_path):
     # Load configuration.
     config = load_config(config_path)
     name_of_run = config["name_of_run"]
     focal_loss_config = config["training_params"].get("focal_loss", {})
     evalutaion_threshold = config["evaluation_threshold"]
+    fig_dir = os.path.join("figures", name_of_run)
+    
+    os.makedirs(fig_dir, exist_ok=True)
     # Configure logging.
     log_dir = os.path.join("logs")
     os.makedirs(log_dir, exist_ok=True)
@@ -65,11 +69,23 @@ def main(config_path):
     train_loader, val_loader, input_dim, num_model_classes, scaler, binary_encoder, model_encoder = load_data(config)
     logger.info("Data loaded. Input dimension: %d, Number of model classes: %d", input_dim, num_model_classes)
 
-    # Define model.
-    model_instance = MultiTaskClassifier_L(input_dim, num_model_classes)
-    logger.info("Model defined with input dimension %d and %d model classes.", input_dim, num_model_classes)
+    model_mapping = {
+        "NeuralForest": DeepNeuralDecisionForestClassifier,
+        "Multi": MultiTaskClassifier,
+        "Multi_L": MultiTaskClassifier_L
+    }
 
-    # Load or train the model.
+    model_choice = config["model"]
+
+    model_class = model_mapping.get(model_choice)
+    if model_class is None:
+        raise ValueError(f"Unknown model type specified in config: {model_choice}")
+
+    model_instance = model_class(input_dim, num_model_classes)
+    logger.info("Model defined: %s with input dimension %d and %d model classes.",
+                model_instance.__class__.__name__, input_dim, num_model_classes)
+
+    #Training/Loading Phase
     if config.get("test", False):
         best_model_path = os.path.join("models", f"best_multi_task_classifier_{name_of_run}.pth")
         if os.path.exists(best_model_path):
@@ -125,13 +141,10 @@ def main(config_path):
                     feature, sal, pimp, pstd)
 
     # Evaluate on the validation set.
-    fig_dir = os.path.join("figures", name_of_run)
-    os.makedirs(fig_dir, exist_ok=True)
-
     binary_preds, binary_true, overall_best_model, best_submodel, model_true = evaluate_model(model_instance, val_loader)
     model_true_labels = model_encoder.inverse_transform(model_true)
     model_true_overall_label = np.array(["Model " + label.split()[1].split('.')[0] for label in model_true_labels])
-    metrics = compute_metrics(binary_preds, binary_true, threshold=0.5, logger=logger)
+    metrics = compute_metrics(binary_preds, binary_true, threshold=evalutaion_threshold, logger=logger)
 
     plot_confusion_matrix(metrics["confusion_matrix"], save_dir=fig_dir)
     plot_histogram(binary_preds, binary_true, save_dir=fig_dir)
@@ -160,7 +173,8 @@ def main(config_path):
 
     # ---- Create corner plots of the validation parameters ----
     X_val = val_loader.dataset.tensors[0].numpy()
-    X_val_df = pd.DataFrame(X_val, columns=selected_features)
+    X_val_original = scaler.inverse_transform(X_val)
+    X_val_df = pd.DataFrame(X_val_original, columns=selected_features)
 
     X_val_df["Predicted_Class"] = binary_preds
     X_val_df["True_Class"] = binary_true

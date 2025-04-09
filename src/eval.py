@@ -376,9 +376,9 @@ def plot_corner_predicted(data, features, save_path=None, palette=None):
 def plot_corner_true(data, features, save_path=None, palette=None):
     return plot_corner(data, features, hue_col="True_Class", save_path=save_path, palette=palette)
 
-def plot_metrics(metric_history, metric_name, save_path=save_path):
+def plot_metrics(metric_history, metric_name, save_path):
     plt.figure(figsize=(8, 5))
-    plt.plot(metric_history, marker='o', label=metric_name)
+    plt.plot(metric_history, label=metric_name)
     plt.xlabel("Epoch")
     plt.ylabel(metric_name)
     plt.title(f"{metric_name} vs Epoch")

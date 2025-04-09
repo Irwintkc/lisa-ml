@@ -1,0 +1,47 @@
+2025-04-06 21:48:58,788 - INFO - Starting multi-task script in main.py.
+2025-04-06 21:48:58,789 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': False,
+                 'fim_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/fims/',
+                 'inference_batch_size': 128,
+                 'n_samples_class0': None,
+                 'n_samples_class1': None,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency_mHz',
+                                       'Amplitude_log10',
+                                       'FrequencyDerivative_log10',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'use_custom_weights': True,
+                 'val_seed_val': 1},
+ 'evaluation_threshold': 0.2,
+ 'model': 'Multi_L',
+ 'name_of_run': 'Baseline_log_weightednormalizedoverbatch',
+ 'test': True,
+ 'training_params': {'focal_loss': {'alpha': 0.25, 'gamma': 2.0},
+                     'lr': 0.001,
+                     'num_epochs': 100}}
+2025-04-06 21:49:00,730 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-04-06 21:49:00,732 - INFO - Model defined: MultiTaskClassifier_L with input dimension 5 and 11 model classes.
+2025-04-06 21:49:00,735 - INFO - Test flag is True. Loaded model from models/best_multi_task_classifier_Baseline_log_weightednormalizedoverbatch.pth
+2025-04-06 21:49:00,767 - INFO - Feature: Frequency_mHz, Average Saliency: 0.0000, Parameters Impact: 13.6693, Parameters Std: 34.7430
+2025-04-06 21:49:00,767 - INFO - Feature: Amplitude_log10, Average Saliency: 0.0000, Parameters Impact: 7.2198, Parameters Std: 20.4926
+2025-04-06 21:49:00,767 - INFO - Feature: FrequencyDerivative_log10, Average Saliency: 0.0000, Parameters Impact: 2.9923, Parameters Std: 7.1851
+2025-04-06 21:49:00,767 - INFO - Feature: SNR, Average Saliency: 0.0000, Parameters Impact: 6.1099, Parameters Std: 15.7341
+2025-04-06 21:49:00,767 - INFO - Feature: Eccentricity, Average Saliency: 0.0000, Parameters Impact: 1.0000, Parameters Std: 2.3138
+2025-04-06 21:49:01,300 - INFO - Validation Metrics:
+2025-04-06 21:49:01,300 - INFO - Accuracy: 0.9913
+2025-04-06 21:49:01,300 - INFO - Precision: 0.6058
+2025-04-06 21:49:01,300 - INFO - Recall (Sensitivity): 0.7293
+2025-04-06 21:49:01,300 - INFO - Specificity: 0.9944
+2025-04-06 21:49:01,301 - INFO - F1 Score: 0.6618
+2025-04-06 21:49:01,301 - INFO - ROC AUC: 0.9700
+2025-04-06 21:49:01,301 - INFO - Balanced Accuracy: 0.8619
+2025-04-06 21:49:01,301 - INFO - Confusion Matrix:
+[[26533   149]
+ [   85   229]]
+2025-04-06 21:49:12,985 - INFO - Corner plot for predicted classes saved to figures/Baseline_log_weightednormalizedoverbatch/corner_plot_predicted.png
+2025-04-06 21:49:23,845 - INFO - Corner plot for true classes saved to figures/Baseline_log_weightednormalizedoverbatch/corner_plot_true.png
+2025-04-06 21:49:24,794 - INFO - Corner plot for true class 1 (Prediction_Status) saved to figures/Baseline_log_weightednormalizedoverbatch/corner_plot_class1_status.png
+2025-04-06 21:49:35,410 - INFO - Evaluation completed successfully in main.py.

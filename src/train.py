@@ -5,6 +5,7 @@ import numpy as np
 import torch.optim as optim
 import torch.nn.functional as F
 from tqdm import tqdm
+from sklearn.metrics import recall_score, confusion_matrix, accuracy_score, matthews_corrcoef, roc_auc_score
 
 class FocalLoss(nn.Module):
     def __init__(self, alpha=0.25, gamma=2.0, reduction='mean'):
@@ -108,6 +109,13 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
     
     train_loss_history = []
     val_loss_history = []
+    # Initialize metric histories.
+    sensitivity_history = []
+    specificity_history = []
+    accuracy_history = []
+    mcc_history = []
+    auc_history = []
+    
     best_val_loss = float('inf')
     best_model_path = None
     
@@ -131,8 +139,14 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
                 loss_binary = criterion_binary(out_binary, binary_labels).squeeze(1)  # shape: [batch_size]
                 loss_model = criterion_model(out_model, model_labels)  # shape: [batch_size]
                 combined_loss = loss_binary + loss_model
-                # Multiply each sample's loss by its corresponding weight and then average.
-                loss = (combined_loss * sample_weights.to(combined_loss.device)).mean()
+
+                # Normalize the sample weights so that their sum equals the batch size.
+                batch_size = combined_loss.shape[0]
+                batch_weights = sample_weights.to(combined_loss.device)
+                norm_weights = batch_weights / batch_weights.sum() * batch_size
+
+                # Multiply each sample's loss by its normalized weight and then average.
+                loss = (combined_loss * norm_weights).mean()
             else:
                 loss_binary = criterion_binary(out_binary, binary_labels)
                 loss_model = criterion_model(out_model, model_labels)
@@ -154,6 +168,10 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
         if val_loader is not None:
             model.eval()
             running_val_loss = 0.0
+            # Collect predictions and labels for metric calculations.
+            all_binary_true = []
+            all_binary_preds = []
+            all_binary_prob = []
             with torch.no_grad():
                 for batch in val_loader:
                     if use_custom_weights:
@@ -161,6 +179,14 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
                     else:
                         inputs, binary_labels, model_labels = batch
                     out_binary, out_model = model(inputs)
+                    # out_binary comes from a Sigmoid so it's already in the 0-1 range.
+                    probs = out_binary.cpu().numpy().flatten()
+                    preds = (probs > 0.5).astype(int) 
+                    all_binary_prob.extend(probs)
+                    all_binary_preds.extend(preds)
+                    all_binary_true.extend(binary_labels.cpu().numpy().flatten())
+                    
+                    # Also compute the loss for validation.
                     if use_custom_weights:
                         loss_binary = criterion_binary(out_binary, binary_labels).squeeze(1)
                         loss_model = criterion_model(out_model, model_labels)
@@ -170,9 +196,36 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
                         loss_model = criterion_model(out_model, model_labels)
                         loss = loss_binary + loss_model
                     running_val_loss += loss.item()
+            
             avg_val_loss = running_val_loss / len(val_loader)
             val_loss_history.append(avg_val_loss)
             logger("Epoch [{}/{}] - Validation Loss: {:.4f}".format(epoch+1, num_epochs, avg_val_loss))
+            
+            # Compute metrics.
+            y_true = np.array(all_binary_true)
+            y_pred = np.array(all_binary_preds)
+            y_prob = np.array(all_binary_prob)
+            
+            # Sensitivity: Recall for the positive class.
+            sensitivity = recall_score(y_true, y_pred, pos_label=1)
+            # Specificity: Recall for the negative class.
+            tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+            specificity = tn / (tn + fp) if (tn + fp) > 0 else 0.0
+            accuracy = accuracy_score(y_true, y_pred)
+            mcc = matthews_corrcoef(y_true, y_pred)
+            try:
+                auc_roc = roc_auc_score(y_true, y_prob)
+            except ValueError:
+                auc_roc = float('nan')
+            
+            sensitivity_history.append(sensitivity)
+            specificity_history.append(specificity)
+            accuracy_history.append(accuracy)
+            mcc_history.append(mcc)
+            auc_history.append(auc_roc)
+            
+            logger("Epoch [{}/{}] Metrics: Sensitivity: {:.4f}, Specificity: {:.4f}, Accuracy: {:.4f}, MCC: {:.4f}, AUC ROC: {:.4f}".format(
+                epoch+1, num_epochs, sensitivity, specificity, accuracy, mcc, auc_roc))
             
             # Save best model based on validation loss.
             if avg_val_loss < best_val_loss:
@@ -181,10 +234,16 @@ def train_model(model, name_of_run, train_loader, val_loader=None, focal_loss_co
                 torch.save(model.state_dict(), best_model_path)
                 logger("Epoch [{}] - Best model updated (Validation Loss: {:.4f})".format(epoch+1, avg_val_loss))
     
+    # Return histories so that you can later plot them.
     if val_loader is not None:
         return {
             "train_loss_history": train_loss_history,
             "val_loss_history": val_loss_history,
+            "sensitivity_history": sensitivity_history,
+            "specificity_history": specificity_history,
+            "accuracy_history": accuracy_history,
+            "mcc_history": mcc_history,
+            "auc_history": auc_history,
             "best_model_path": best_model_path
         }
     else:
