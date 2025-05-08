@@ -1,0 +1,99 @@
+2025-04-20 15:05:41,075 - INFO - Starting multi-task script in main.py.
+2025-04-20 15:05:41,075 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': False,
+                 'fim_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/fims/',
+                 'frequency_range': None,
+                 'inference_batch_size': 1000,
+                 'n_samples_class0': None,
+                 'n_samples_class1': None,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency_mHz',
+                                       'Amplitude_log10',
+                                       'FrequencyDerivative_log10',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 1000,
+                 'use_custom_weights': False,
+                 'val_seed_val': 1},
+ 'evaluation_threshold': 0.5,
+ 'model': 'NeuralForest',
+ 'name_of_run': 'NDF_log',
+ 'ndf_params': {'jointly_training': False,
+                'n_tree': 5,
+                'tree_depth': 3,
+                'tree_feature_rate': 0.5},
+ 'test': False,
+ 'training_params': {'focal_loss': {'alpha': 0.25, 'gamma': 2.0},
+                     'lr': 0.001,
+                     'num_epochs': 5}}
+2025-04-20 15:05:41,673 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-04-20 15:05:41,675 - INFO - Model defined: NeuralDecisionForest with input dimension 5 and 11 model classes.
+2025-04-20 15:05:45,912 - INFO - [Epoch 1/5] 0/107984 Loss: 0.202628
+2025-04-20 15:05:46,136 - INFO - [Epoch 1/5] 10000/107984 Loss: 0.257890
+2025-04-20 15:05:46,304 - INFO - [Epoch 1/5] 20000/107984 Loss: 0.276310
+2025-04-20 15:05:46,478 - INFO - [Epoch 1/5] 30000/107984 Loss: 0.184207
+2025-04-20 15:05:46,642 - INFO - [Epoch 1/5] 40000/107984 Loss: 0.147365
+2025-04-20 15:05:46,804 - INFO - [Epoch 1/5] 50000/107984 Loss: 0.221048
+2025-04-20 15:05:47,023 - INFO - [Epoch 1/5] 60000/107984 Loss: 0.165786
+2025-04-20 15:05:47,218 - INFO - [Epoch 1/5] 70000/107984 Loss: 0.239469
+2025-04-20 15:05:47,385 - INFO - [Epoch 1/5] 80000/107984 Loss: 0.202627
+2025-04-20 15:05:47,560 - INFO - [Epoch 1/5] 90000/107984 Loss: 0.202628
+2025-04-20 15:05:47,728 - INFO - [Epoch 1/5] 100000/107984 Loss: 0.184207
+2025-04-20 15:05:48,168 - INFO - → Val Loss: 0.2143, Acc: 98.84%, Sens: 0.00%, Spec: 100.00%, MCC: 0.0000, AUC: 0.5000
+2025-04-20 15:05:48,171 - INFO - *** Best model saved to models/best_ndf_NDF_log.pth
+2025-04-20 15:05:51,882 - INFO - [Epoch 2/5] 0/107984 Loss: 0.110524
+2025-04-20 15:05:52,110 - INFO - [Epoch 2/5] 10000/107984 Loss: 0.257890
+2025-04-20 15:05:52,278 - INFO - [Epoch 2/5] 20000/107984 Loss: 0.184207
+2025-04-20 15:05:52,444 - INFO - [Epoch 2/5] 30000/107984 Loss: 0.202628
+2025-04-20 15:05:52,613 - INFO - [Epoch 2/5] 40000/107984 Loss: 0.294731
+2025-04-20 15:05:52,776 - INFO - [Epoch 2/5] 50000/107984 Loss: 0.294731
+2025-04-20 15:05:53,000 - INFO - [Epoch 2/5] 60000/107984 Loss: 0.184207
+2025-04-20 15:05:53,169 - INFO - [Epoch 2/5] 70000/107984 Loss: 0.147365
+2025-04-20 15:05:53,338 - INFO - [Epoch 2/5] 80000/107984 Loss: 0.184207
+2025-04-20 15:05:53,525 - INFO - [Epoch 2/5] 90000/107984 Loss: 0.239469
+2025-04-20 15:05:53,718 - INFO - [Epoch 2/5] 100000/107984 Loss: 0.294731
+2025-04-20 15:05:54,179 - INFO - → Val Loss: 0.2143, Acc: 98.84%, Sens: 0.00%, Spec: 100.00%, MCC: 0.0000, AUC: 0.5000
+2025-04-20 15:05:57,954 - INFO - [Epoch 3/5] 0/107984 Loss: 0.128945
+2025-04-20 15:05:58,131 - INFO - [Epoch 3/5] 10000/107984 Loss: 0.257890
+2025-04-20 15:05:58,348 - INFO - [Epoch 3/5] 20000/107984 Loss: 0.221048
+2025-04-20 15:05:58,514 - INFO - [Epoch 3/5] 30000/107984 Loss: 0.221048
+2025-04-20 15:05:58,674 - INFO - [Epoch 3/5] 40000/107984 Loss: 0.239469
+2025-04-20 15:05:58,838 - INFO - [Epoch 3/5] 50000/107984 Loss: 0.257890
+2025-04-20 15:05:59,004 - INFO - [Epoch 3/5] 60000/107984 Loss: 0.055262
+2025-04-20 15:05:59,227 - INFO - [Epoch 3/5] 70000/107984 Loss: 0.128945
+2025-04-20 15:05:59,397 - INFO - [Epoch 3/5] 80000/107984 Loss: 0.128945
+2025-04-20 15:05:59,561 - INFO - [Epoch 3/5] 90000/107984 Loss: 0.184207
+2025-04-20 15:05:59,720 - INFO - [Epoch 3/5] 100000/107984 Loss: 0.128945
+2025-04-20 15:06:00,162 - INFO - → Val Loss: 0.2143, Acc: 98.84%, Sens: 0.00%, Spec: 100.00%, MCC: 0.0000, AUC: 0.5000
+2025-04-20 15:06:03,961 - INFO - [Epoch 4/5] 0/107984 Loss: 0.147365
+2025-04-20 15:06:04,160 - INFO - [Epoch 4/5] 10000/107984 Loss: 0.202628
+2025-04-20 15:06:04,412 - INFO - [Epoch 4/5] 20000/107984 Loss: 0.128945
+2025-04-20 15:06:04,605 - INFO - [Epoch 4/5] 30000/107984 Loss: 0.221048
+2025-04-20 15:06:04,787 - INFO - [Epoch 4/5] 40000/107984 Loss: 0.165786
+2025-04-20 15:06:04,972 - INFO - [Epoch 4/5] 50000/107984 Loss: 0.276310
+2025-04-20 15:06:05,152 - INFO - [Epoch 4/5] 60000/107984 Loss: 0.165786
+2025-04-20 15:06:05,393 - INFO - [Epoch 4/5] 70000/107984 Loss: 0.128945
+2025-04-20 15:06:05,581 - INFO - [Epoch 4/5] 80000/107984 Loss: 0.239469
+2025-04-20 15:06:05,764 - INFO - [Epoch 4/5] 90000/107984 Loss: 0.239469
+2025-04-20 15:06:05,947 - INFO - [Epoch 4/5] 100000/107984 Loss: 0.239469
+2025-04-20 15:06:06,397 - INFO - → Val Loss: 0.2143, Acc: 98.84%, Sens: 0.00%, Spec: 100.00%, MCC: 0.0000, AUC: 0.5000
+2025-04-20 15:06:10,230 - INFO - [Epoch 5/5] 0/107984 Loss: 0.257890
+2025-04-20 15:06:10,423 - INFO - [Epoch 5/5] 10000/107984 Loss: 0.276310
+2025-04-20 15:06:10,611 - INFO - [Epoch 5/5] 20000/107984 Loss: 0.349993
+2025-04-20 15:06:10,856 - INFO - [Epoch 5/5] 30000/107984 Loss: 0.092103
+2025-04-20 15:06:11,039 - INFO - [Epoch 5/5] 40000/107984 Loss: 0.165786
+2025-04-20 15:06:11,225 - INFO - [Epoch 5/5] 50000/107984 Loss: 0.276310
+2025-04-20 15:06:11,409 - INFO - [Epoch 5/5] 60000/107984 Loss: 0.128945
+2025-04-20 15:06:11,594 - INFO - [Epoch 5/5] 70000/107984 Loss: 0.276310
+2025-04-20 15:06:11,833 - INFO - [Epoch 5/5] 80000/107984 Loss: 0.110524
+2025-04-20 15:06:12,016 - INFO - [Epoch 5/5] 90000/107984 Loss: 0.202628
+2025-04-20 15:06:12,203 - INFO - [Epoch 5/5] 100000/107984 Loss: 0.147365
+2025-04-20 15:06:12,654 - INFO - → Val Loss: 0.2143, Acc: 98.84%, Sens: 0.00%, Spec: 100.00%, MCC: 0.0000, AUC: 0.5000
+2025-04-20 15:06:12,656 - INFO - Best model loaded from models/best_ndf_NDF_log.pth
+2025-04-20 15:06:12,657 - INFO - Training and Validation loss history saved to models/loss_history/train_val_loss_history_NDF_log.csv
+2025-04-20 15:06:12,978 - INFO - Feature: Frequency_mHz, Average Saliency: 0.0000, Parameters Impact: nan, Parameters Std: nan
+2025-04-20 15:06:12,978 - INFO - Feature: Amplitude_log10, Average Saliency: 0.0000, Parameters Impact: nan, Parameters Std: nan
+2025-04-20 15:06:12,978 - INFO - Feature: FrequencyDerivative_log10, Average Saliency: 0.0000, Parameters Impact: nan, Parameters Std: nan
+2025-04-20 15:06:12,979 - INFO - Feature: SNR, Average Saliency: 0.0000, Parameters Impact: nan, Parameters Std: nan
+2025-04-20 15:06:12,979 - INFO - Feature: Eccentricity, Average Saliency: 0.0000, Parameters Impact: nan, Parameters Std: nan

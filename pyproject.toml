@@ -18,3 +18,25 @@ astropy = "7.0.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+ignore = [
+    "D205",
+    "D213",
+    "D407",
+    "D413",
+    "D202",
+    "D203",
+    "D406",
+    "D401",
+    "D400",
+    "D415",
+    "D417",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

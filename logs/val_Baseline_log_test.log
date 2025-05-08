@@ -1,0 +1,48 @@
+2025-04-21 13:44:22,906 - INFO - Starting multi-task script in main.py.
+2025-04-21 13:44:22,907 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': False,
+                 'fim_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/fims/',
+                 'frequency_range': None,
+                 'inference_batch_size': 128,
+                 'n_samples_class0': None,
+                 'n_samples_class1': None,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency_mHz',
+                                       'Amplitude_log10',
+                                       'FrequencyDerivative_log10',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'use_custom_weights': False,
+                 'val_seed_val': 1},
+ 'evaluation_threshold': 0.5,
+ 'model': 'Multi_L',
+ 'name_of_run': 'Baseline_log_test',
+ 'ndf_params': {'jointly_training': False,
+                'n_tree': 5,
+                'tree_depth': 3,
+                'tree_feature_rate': 0.5},
+ 'test': True,
+ 'training_params': {'focal_loss': {'alpha': 0.25, 'gamma': 2.0},
+                     'lr': 0.001,
+                     'num_epochs': 5}}
+2025-04-21 13:44:23,695 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-04-21 13:44:23,697 - INFO - Model defined: MultiTaskClassifier_L with input dimension 5 and 11 model classes.
+2025-04-21 13:44:23,700 - INFO - Test flag is True. Loaded model from models/best_multi_task_classifier_Baseline_log_test.pth
+2025-04-21 13:44:23,730 - INFO - Feature: Frequency_mHz, Average Saliency: 0.0000, Parameters Impact: 57.4476, Parameters Std: 181.4408
+2025-04-21 13:44:23,730 - INFO - Feature: Amplitude_log10, Average Saliency: 0.0000, Parameters Impact: 14.2326, Parameters Std: 44.9347
+2025-04-21 13:44:23,730 - INFO - Feature: FrequencyDerivative_log10, Average Saliency: 0.0000, Parameters Impact: 30.8159, Parameters Std: 97.3165
+2025-04-21 13:44:23,730 - INFO - Feature: SNR, Average Saliency: 0.0000, Parameters Impact: 1.0000, Parameters Std: 3.0595
+2025-04-21 13:44:23,730 - INFO - Feature: Eccentricity, Average Saliency: 0.0000, Parameters Impact: 7.8163, Parameters Std: 24.5834
+2025-04-21 13:44:24,158 - INFO - Validation Metrics:
+2025-04-21 13:44:24,158 - INFO - Accuracy: 0.9922
+2025-04-21 13:44:24,158 - INFO - Precision: 0.0000
+2025-04-21 13:44:24,158 - INFO - Recall (Sensitivity): 0.0000
+2025-04-21 13:44:24,158 - INFO - Specificity: 1.0000
+2025-04-21 13:44:24,158 - INFO - F1 Score: 0.0000
+2025-04-21 13:44:24,159 - INFO - ROC AUC: 1.0000
+2025-04-21 13:44:24,159 - INFO - Balanced Accuracy: 0.5000
+2025-04-21 13:44:24,159 - INFO - Confusion Matrix:
+[[127   0]
+ [  1   0]]

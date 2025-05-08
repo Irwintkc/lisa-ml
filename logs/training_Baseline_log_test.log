@@ -1,0 +1,32 @@
+2025-04-20 23:50:56,461 - INFO - Starting multi-task script in main.py.
+2025-04-20 23:50:56,462 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': False,
+                 'fim_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/fims/',
+                 'frequency_range': None,
+                 'inference_batch_size': 128,
+                 'n_samples_class0': None,
+                 'n_samples_class1': None,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency_mHz',
+                                       'Amplitude_log10',
+                                       'FrequencyDerivative_log10',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'use_custom_weights': False,
+                 'val_seed_val': 1},
+ 'evaluation_threshold': 0.5,
+ 'model': 'Multi_L',
+ 'name_of_run': 'Baseline_log_test',
+ 'ndf_params': {'jointly_training': False,
+                'n_tree': 5,
+                'tree_depth': 3,
+                'tree_feature_rate': 0.5},
+ 'test': False,
+ 'training_params': {'focal_loss': {'alpha': 0.25, 'gamma': 2.0},
+                     'lr': 0.001,
+                     'num_epochs': 5}}
+2025-04-20 23:50:57,243 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-04-20 23:50:57,245 - INFO - Model defined: MultiTaskClassifier_L with input dimension 5 and 11 model classes.
+2025-04-20 23:50:57,963 - INFO - Starting training for 5 epochs.

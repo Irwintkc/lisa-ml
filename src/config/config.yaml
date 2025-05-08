@@ -1,5 +1,6 @@
-name_of_run: Baseline_log_weightednormalizedoverbatch_class1_20
-model: 'Multi_L' #Multi, Multi_L, NeuralForest
+name_of_run: Binary_Baseline_weighted_log_class1_100
+model: "Binary" #Multi, Multi_L, NeuralForest, Binary
+
 data_params:
   resolved_folder_path: "/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/"
   fim_folder_path: "/Users/irwin/Documents/GitHub/lisa-ml/data/fims/"
@@ -9,8 +10,13 @@ data_params:
     - FrequencyDerivative_log10
     - SNR
     - Eccentricity
+  #  - EclipticLatitude_sin
+  #  - Inclination_cos
+  # - Polarization
+  #  - EclipticLongitude
+  #  - InitialPhase
   n_samples_class0: 1
-  n_samples_class1: 20
+  n_samples_class1: 100
   ecc_0_only: False
   use_custom_weights: True
   test_seed_val: 1
@@ -18,12 +24,20 @@ data_params:
   training_batch_size: 128
   inference_batch_size: 128
   frequency_range: null #Include all data above and equals to n mHz, if upsampling is applied, filtering will be applied before the upsampling
+
 training_params:
   num_epochs: 100
   lr: 0.001
   focal_loss:
     gamma: 2.0
     alpha: 0.25
-evaluation_threshold: 0.5
-test: False
-  
+
+ndf_params:
+  n_tree: 5
+  tree_depth: 3
+  tree_feature_rate: 0.5
+  jointly_training: False
+
+evaluation_threshold: 0.3
+test: True
+

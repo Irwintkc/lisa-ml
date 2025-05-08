@@ -1,0 +1,52 @@
+2025-04-24 14:19:22,665 - INFO - Starting multi-task script in main.py.
+2025-04-24 14:19:22,665 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': False,
+                 'fim_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/fims/',
+                 'frequency_range': None,
+                 'inference_batch_size': 128,
+                 'n_samples_class0': 1,
+                 'n_samples_class1': 100,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency_mHz',
+                                       'Amplitude_log10',
+                                       'FrequencyDerivative_log10',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'use_custom_weights': True,
+                 'val_seed_val': 1},
+ 'evaluation_threshold': 0.3,
+ 'model': 'Binary',
+ 'name_of_run': 'Binary_Baseline_weighted_log_class1_100',
+ 'ndf_params': {'jointly_training': False,
+                'n_tree': 5,
+                'tree_depth': 3,
+                'tree_feature_rate': 0.5},
+ 'test': True,
+ 'training_params': {'focal_loss': {'alpha': 0.25, 'gamma': 2.0},
+                     'lr': 0.001,
+                     'num_epochs': 100}}
+2025-04-24 14:21:40,941 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-04-24 14:21:40,949 - INFO - Model defined: BinaryClassifier with input dimension 5.
+2025-04-24 14:21:40,958 - INFO - Test flag is True. Loaded model from models/best_multi_task_classifier_Binary_Baseline_weighted_log_class1_100.pth
+2025-04-24 14:21:41,091 - INFO - Feature: Frequency_mHz, Average Saliency: 0.1188, Parameters Impact: 2.2985, Parameters Std: 4.2885
+2025-04-24 14:21:41,091 - INFO - Feature: Amplitude_log10, Average Saliency: 0.3785, Parameters Impact: 7.3213, Parameters Std: 14.8654
+2025-04-24 14:21:41,091 - INFO - Feature: FrequencyDerivative_log10, Average Saliency: 1.6503, Parameters Impact: 31.9230, Parameters Std: 78.1422
+2025-04-24 14:21:41,091 - INFO - Feature: SNR, Average Saliency: 0.0517, Parameters Impact: 1.0000, Parameters Std: 1.5205
+2025-04-24 14:21:41,091 - INFO - Feature: Eccentricity, Average Saliency: 0.1730, Parameters Impact: 3.3462, Parameters Std: 6.6557
+2025-04-24 14:21:41,470 - INFO - Validation Metrics:
+2025-04-24 14:21:41,470 - INFO - Accuracy: 0.9943
+2025-04-24 14:21:41,470 - INFO - Precision: 0.7484
+2025-04-24 14:21:41,471 - INFO - Recall (Sensitivity): 0.7675
+2025-04-24 14:21:41,471 - INFO - Specificity: 0.9970
+2025-04-24 14:21:41,471 - INFO - F1 Score: 0.7579
+2025-04-24 14:21:41,471 - INFO - ROC AUC: 0.9851
+2025-04-24 14:21:41,471 - INFO - Balanced Accuracy: 0.8822
+2025-04-24 14:21:41,471 - INFO - Confusion Matrix:
+[[26601    81]
+ [   73   241]]
+2025-04-24 14:21:55,573 - INFO - Corner plot for predicted classes saved to figures/Binary_Baseline_weighted_log_class1_100/corner_plot_predicted.png
+2025-04-24 14:22:08,827 - INFO - Corner plot for true classes saved to figures/Binary_Baseline_weighted_log_class1_100/corner_plot_true.png
+2025-04-24 14:22:10,082 - INFO - Corner plot for true class 1 (Prediction_Status) saved to figures/Binary_Baseline_weighted_log_class1_100/corner_plot_class1_status.png
+2025-04-24 14:22:23,415 - INFO - Evaluation completed successfully in main.py.

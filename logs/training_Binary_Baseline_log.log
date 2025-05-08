@@ -1,0 +1,73 @@
+2025-04-21 14:21:14,829 - INFO - Starting multi-task script in main.py.
+2025-04-21 14:21:14,830 - INFO - Loaded configuration settings:
+{'data_params': {'ecc_0_only': False,
+                 'fim_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/fims/',
+                 'frequency_range': None,
+                 'inference_batch_size': 128,
+                 'n_samples_class0': None,
+                 'n_samples_class1': None,
+                 'resolved_folder_path': '/Users/irwin/Documents/GitHub/lisa-ml/data/resolved_binaries/',
+                 'selected_features': ['Frequency_mHz',
+                                       'Amplitude_log10',
+                                       'FrequencyDerivative_log10',
+                                       'SNR',
+                                       'Eccentricity'],
+                 'test_seed_val': 1,
+                 'training_batch_size': 128,
+                 'use_custom_weights': False,
+                 'val_seed_val': 1},
+ 'evaluation_threshold': 0.5,
+ 'model': 'Binary',
+ 'name_of_run': 'Binary_Baseline_log',
+ 'ndf_params': {'jointly_training': False,
+                'n_tree': 5,
+                'tree_depth': 3,
+                'tree_feature_rate': 0.5},
+ 'test': False,
+ 'training_params': {'focal_loss': {'alpha': 0.25, 'gamma': 2.0},
+                     'lr': 0.001,
+                     'num_epochs': 5}}
+2025-04-21 14:21:15,399 - INFO - Data loaded. Input dimension: 5, Number of model classes: 11
+2025-04-21 14:21:15,400 - INFO - Model defined: BinaryClassifier with input dimension 5.
+2025-04-21 14:21:15,712 - INFO - Starting training for 5 epochs.
+2025-04-21 14:21:19,359 - INFO - Epoch [1/5] - Training Loss: 0.0047 - Learning Rate: 0.001000
+2025-04-21 14:21:19,579 - INFO - Epoch [1/5] - Validation Loss: 0.0019
+2025-04-21 14:21:19,594 - INFO - Epoch [1/5] Metrics: Sensitivity: 0.6497, Specificity: 1.0000, Accuracy: 0.9959, MCC: 0.8044, AUC ROC: 0.9797
+2025-04-21 14:21:19,596 - INFO - Epoch [1] - Best model updated (Validation Loss: 0.0019)
+2025-04-21 14:21:23,141 - INFO - Epoch [2/5] - Training Loss: 0.0021 - Learning Rate: 0.001000
+2025-04-21 14:21:23,347 - INFO - Epoch [2/5] - Validation Loss: 0.0013
+2025-04-21 14:21:23,360 - INFO - Epoch [2/5] Metrics: Sensitivity: 0.7134, Specificity: 1.0000, Accuracy: 0.9967, MCC: 0.8432, AUC ROC: 0.9873
+2025-04-21 14:21:23,361 - INFO - Epoch [2] - Best model updated (Validation Loss: 0.0013)
+2025-04-21 14:21:26,813 - INFO - Epoch [3/5] - Training Loss: 0.0018 - Learning Rate: 0.001000
+2025-04-21 14:21:27,041 - INFO - Epoch [3/5] - Validation Loss: 0.0012
+2025-04-21 14:21:27,053 - INFO - Epoch [3/5] Metrics: Sensitivity: 0.7134, Specificity: 1.0000, Accuracy: 0.9967, MCC: 0.8432, AUC ROC: 0.9913
+2025-04-21 14:21:27,054 - INFO - Epoch [3] - Best model updated (Validation Loss: 0.0012)
+2025-04-21 14:21:30,880 - INFO - Epoch [4/5] - Training Loss: 0.0016 - Learning Rate: 0.001000
+2025-04-21 14:21:31,140 - INFO - Epoch [4/5] - Validation Loss: 0.0012
+2025-04-21 14:21:31,155 - INFO - Epoch [4/5] Metrics: Sensitivity: 0.7134, Specificity: 1.0000, Accuracy: 0.9967, MCC: 0.8432, AUC ROC: 0.9891
+2025-04-21 14:21:31,158 - INFO - Epoch [4] - Best model updated (Validation Loss: 0.0012)
+2025-04-21 14:21:35,103 - INFO - Epoch [5/5] - Training Loss: 0.0014 - Learning Rate: 0.001000
+2025-04-21 14:21:35,335 - INFO - Epoch [5/5] - Validation Loss: 0.0012
+2025-04-21 14:21:35,347 - INFO - Epoch [5/5] Metrics: Sensitivity: 0.7134, Specificity: 1.0000, Accuracy: 0.9967, MCC: 0.8432, AUC ROC: 0.9914
+2025-04-21 14:21:35,349 - INFO - Best model loaded from models/best_multi_task_classifier_Binary_Baseline_log.pth
+2025-04-21 14:21:35,351 - INFO - Training and Validation loss history saved to models/loss_history/train_val_loss_history_Binary_Baseline_log.csv
+2025-04-21 14:21:35,683 - INFO - Feature: Frequency_mHz, Average Saliency: 0.0194, Parameters Impact: 7.2408, Parameters Std: 13.7760
+2025-04-21 14:21:35,683 - INFO - Feature: Amplitude_log10, Average Saliency: 0.0063, Parameters Impact: 2.3602, Parameters Std: 4.2893
+2025-04-21 14:21:35,683 - INFO - Feature: FrequencyDerivative_log10, Average Saliency: 0.0108, Parameters Impact: 4.0235, Parameters Std: 8.2810
+2025-04-21 14:21:35,683 - INFO - Feature: SNR, Average Saliency: 0.0027, Parameters Impact: 1.0000, Parameters Std: 1.6355
+2025-04-21 14:21:35,683 - INFO - Feature: Eccentricity, Average Saliency: 0.0279, Parameters Impact: 10.4235, Parameters Std: 21.1441
+2025-04-21 14:21:35,916 - INFO - Validation Metrics:
+2025-04-21 14:21:35,916 - INFO - Accuracy: 0.9967
+2025-04-21 14:21:35,916 - INFO - Precision: 1.0000
+2025-04-21 14:21:35,916 - INFO - Recall (Sensitivity): 0.7134
+2025-04-21 14:21:35,916 - INFO - Specificity: 1.0000
+2025-04-21 14:21:35,916 - INFO - F1 Score: 0.8327
+2025-04-21 14:21:35,916 - INFO - ROC AUC: 0.9891
+2025-04-21 14:21:35,916 - INFO - Balanced Accuracy: 0.8567
+2025-04-21 14:21:35,916 - INFO - Confusion Matrix:
+[[26682     0]
+ [   90   224]]
+2025-04-21 14:21:47,311 - INFO - Corner plot for predicted classes saved to figures/Binary_Baseline_log/corner_plot_predicted.png
+2025-04-21 14:21:58,311 - INFO - Corner plot for true classes saved to figures/Binary_Baseline_log/corner_plot_true.png
+2025-04-21 14:21:59,369 - INFO - Corner plot for true class 1 (Prediction_Status) saved to figures/Binary_Baseline_log/corner_plot_class1_status.png
+2025-04-21 14:22:10,061 - INFO - Evaluation completed successfully in main.py.
