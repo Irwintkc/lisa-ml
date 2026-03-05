@@ -25,6 +25,7 @@ outputs/
 models/
 figures/
 notebooks/figures/
+logs/
 *.h5
 *.pth
 *.pt
