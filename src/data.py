@@ -168,7 +168,11 @@ def load_data(config):
     df["EclipticLatitude_sin"] = np.sin(df["EclipticLatitude"])
     df["Amplitude_log10"] = np.log10(df["Amplitude"])
     df["Inclination_cos"] = np.cos(df["Inclination"])
-
+    if model_class == 'Binary':
+        df = df[
+        ~df['Name'].str.startswith('MW_DWD')
+        | ~df.duplicated(subset='Name')
+        ].reset_index(drop=True)  #remove DWD duplicates
     # Remove unneeded original columns.
     cols_to_remove = [
         "Frequency",
@@ -310,46 +314,60 @@ def load_data(config):
 
     X_train_tensor = torch.tensor(X_train_scaled, dtype=torch.float32)
     X_val_tensor = torch.tensor(X_val_scaled, dtype=torch.float32)
+    X_test_tensor = torch.tensor(X_test_scaled, dtype=torch.float32)
     y_binary_train_tensor = torch.tensor(y_binary_train.values, dtype=torch.long).unsqueeze(1)
     y_binary_val_tensor = torch.tensor(y_binary_val.values, dtype=torch.long).unsqueeze(1)
+    y_binary_test_tensor = torch.tensor(y_binary_test.values, dtype=torch.long).unsqueeze(1)
     y_model_train_tensor = torch.tensor(y_model_train.values, dtype=torch.long)
     y_model_val_tensor = torch.tensor(y_model_val.values, dtype=torch.long)
+    y_model_test_tensor = torch.tensor(y_model_test.values, dtype=torch.long)
 
     if use_custom_weights:
         if model_class == 'Binary' or model_class == 'NeuralForest':
             weights_train_tensor = torch.tensor(weights_train.values, dtype=torch.float32)
             weights_val_tensor = torch.tensor(np.ones(len(y_binary_val)), dtype=torch.float32)
+            weights_test_tensor = torch.tensor(np.ones(len(y_binary_test)), dtype=torch.float32)
             train_dataset = TensorDataset(
                 X_train_tensor, y_binary_train_tensor, weights_train_tensor
             )
             val_dataset = TensorDataset(
                 X_val_tensor, y_binary_val_tensor, weights_val_tensor
             )
+            test_dataset = TensorDataset(
+                X_test_tensor, y_binary_test_tensor, weights_test_tensor
+            )
         else:
             weights_train_tensor = torch.tensor(weights_train.values, dtype=torch.float32)
             weights_val_tensor = torch.tensor(np.ones(len(y_binary_val)), dtype=torch.float32)
+            weights_test_tensor = torch.tensor(np.ones(len(y_binary_test)), dtype=torch.float32)
             train_dataset = TensorDataset(
                 X_train_tensor, y_binary_train_tensor, y_model_train_tensor, weights_train_tensor
             )
             val_dataset = TensorDataset(
                 X_val_tensor, y_binary_val_tensor, y_model_val_tensor, weights_val_tensor
             )
+            test_dataset = TensorDataset(
+                X_test_tensor, y_binary_test_tensor, y_model_test_tensor, weights_test_tensor
+            )
     elif model_class == 'Binary' or model_class == 'NeuralForest':
         train_dataset = TensorDataset(X_train_tensor, y_binary_train_tensor)
         val_dataset = TensorDataset(X_val_tensor, y_binary_val_tensor)
+        test_dataset = TensorDataset(X_test_tensor, y_binary_test_tensor)
     else: 
         train_dataset = TensorDataset(X_train_tensor, y_binary_train_tensor, y_model_train_tensor)
         val_dataset = TensorDataset(X_val_tensor, y_binary_val_tensor, y_model_val_tensor)
+        test_dataset = TensorDataset(X_test_tensor, y_binary_test_tensor, y_model_test_tensor)
 
     train_loader = DataLoader(train_dataset, batch_size=training_batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=inference_batch_size, shuffle=False)
-
+    test_loader = DataLoader(test_dataset, batch_size=inference_batch_size, shuffle=False)
     input_dim = X_train_tensor.shape[1]
     num_model_classes = len(model_encoder.classes_)
 
     return (
         train_loader,
         val_loader,
+        test_loader,
         input_dim,
         num_model_classes,
         scaler,

@@ -7,10 +7,15 @@ import argparse
 import pprint
 import matplotlib.pyplot as plt
 
-from model import MultiTaskClassifier, MultiTaskClassifier_L, prepare_ndf_model, BinaryClassifier
-from data import load_config, load_data
-from train import train_model, compute_saliency, train_ndp
-from eval import (
+from src.model import (
+    MultiTaskClassifier,
+    MultiTaskClassifier_L,
+    prepare_ndf_model,
+    BinaryClassifier,
+)
+from src.data import load_config, load_data
+from src.train import train_model, compute_saliency, train_ndp
+from src.eval import (
     evaluate_model,
     plot_confusion_matrix,
     plot_histogram,
@@ -29,7 +34,7 @@ from sklearn.metrics import confusion_matrix
 def main(config_path):
     # Load configuration.
     config = load_config(config_path)
-    data_config = config["data_params"] 
+    data_config = config["data_params"]
     name_of_run = config["name_of_run"]
     focal_loss_config = config["training_params"].get("focal_loss", {})
     evalutaion_threshold = config["evaluation_threshold"]
@@ -77,12 +82,9 @@ def main(config_path):
         num_model_classes,
     )
 
-
-
     model_choice = config["model"]
     config_ndf = config["ndf_params"]
     if model_choice == "NeuralForest":
-        # build your single‑head (binary) NDF
         model_instance = prepare_ndf_model(config_ndf, input_dim)
         logger.info(
             "Model defined: %s with input dimension %d and %d model classes.",
@@ -92,7 +94,7 @@ def main(config_path):
         )
     else:
         model_mapping = {
-            "Multi":   MultiTaskClassifier,
+            "Multi": MultiTaskClassifier,
             "Multi_L": MultiTaskClassifier_L,
             "Binary": BinaryClassifier,
         }
@@ -103,10 +105,10 @@ def main(config_path):
         if model_class == BinaryClassifier:
             model_instance = model_class(input_dim)
             logger.info(
-            "Model defined: %s with input dimension %d.",
-            model_instance.__class__.__name__,
-            input_dim,
-                    )
+                "Model defined: %s with input dimension %d.",
+                model_instance.__class__.__name__,
+                input_dim,
+            )
         else:
             model_instance = model_class(input_dim, num_model_classes)
 
@@ -119,16 +121,20 @@ def main(config_path):
 
     # Training/Loading Phase
     if config.get("test", False):
-        best_model_path = os.path.join("models", f"best_multi_task_classifier_{name_of_run}.pth")
+        best_model_path = os.path.join(
+            "models", f"best_multi_task_classifier_{name_of_run}.pth"
+        )
         if os.path.exists(best_model_path):
             model_instance.load_state_dict(torch.load(best_model_path))
             logger.info("Test flag is True. Loaded model from %s", best_model_path)
         else:
-            logger.error("Test flag is True but model file %s not found.", best_model_path)
+            logger.error(
+                "Test flag is True but model file %s not found.", best_model_path
+            )
             return
     else:
         num_epochs = config["training_params"]["num_epochs"]
-        lr         = config["training_params"]["lr"]
+        lr = config["training_params"]["lr"]
 
         if model_choice == "NeuralForest":
             # two-stage NDF trainer
@@ -154,9 +160,12 @@ def main(config_path):
                 num_epochs=num_epochs,
                 lr=lr,
                 logger=logger.info,
-                use_custom_weights = use_custom_weights
+                use_custom_weights=use_custom_weights,
             )
-        if "best_model_path" in training_results and training_results["best_model_path"]:
+        if (
+            "best_model_path" in training_results
+            and training_results["best_model_path"]
+        ):
             best_model_path = training_results["best_model_path"]
             model_instance.load_state_dict(torch.load(best_model_path))
             logger.info("Best model loaded from %s", best_model_path)
@@ -168,18 +177,26 @@ def main(config_path):
                 }
             )
         else:
-            loss_history_df = pd.DataFrame({"train_loss": training_results["train_loss_history"]})
+            loss_history_df = pd.DataFrame(
+                {"train_loss": training_results["train_loss_history"]}
+            )
 
         loss_history_path = os.path.join(
             "models", "loss_history", f"train_val_loss_history_{name_of_run}.csv"
         )
         os.makedirs(os.path.dirname(loss_history_path), exist_ok=True)
         loss_history_df.to_csv(loss_history_path, index=False)
-        logger.info("Training and Validation loss history saved to %s", loss_history_path)
+        logger.info(
+            "Training and Validation loss history saved to %s", loss_history_path
+        )
         se_history_path = os.path.join(fig_dir, "se_history.png")
-        plot_metrics(training_results["sensitivity_history"], "Sensitivity", se_history_path)
+        plot_metrics(
+            training_results["sensitivity_history"], "Sensitivity", se_history_path
+        )
         sp_history_path = os.path.join(fig_dir, "sp_history.png")
-        plot_metrics(training_results["specificity_history"], "Specificity", sp_history_path)
+        plot_metrics(
+            training_results["specificity_history"], "Specificity", sp_history_path
+        )
         acc_history_path = os.path.join(fig_dir, "acc_history.png")
         plot_metrics(training_results["accuracy_history"], "Accuracy", acc_history_path)
         mcc_history_path = os.path.join(fig_dir, "mcc_history.png")
@@ -206,9 +223,9 @@ def main(config_path):
         )
 
     # Evaluate on the validation set.
-    if  model_choice == 'Multi_L':
-        binary_preds, binary_true, overall_best_model, best_submodel, model_true = evaluate_model(
-            model_instance, val_loader
+    if model_choice == "Multi_L":
+        binary_preds, binary_true, overall_best_model, best_submodel, model_true = (
+            evaluate_model(model_instance, val_loader)
         )
         model_true_labels = model_encoder.inverse_transform(model_true)
         model_true_overall_label = np.array(
@@ -229,7 +246,9 @@ def main(config_path):
         true_submodels = model_true_labels[mask]
         pred_submodels = np.array(best_submodel)[mask]
         submodel_classes = np.unique(np.concatenate((true_submodels, pred_submodels)))
-        cm_sub = confusion_matrix(true_submodels, pred_submodels, labels=submodel_classes)
+        cm_sub = confusion_matrix(
+            true_submodels, pred_submodels, labels=submodel_classes
+        )
         plot_confusion_matrix_multiclass(
             cm_sub,
             class_names=list(submodel_classes),
@@ -237,9 +256,10 @@ def main(config_path):
             filename="cm_correct_overall_submodel.png",
         )
     else:
-        binary_preds, binary_true, = evaluate_model(
-            model_instance, val_loader
-        )
+        (
+            binary_preds,
+            binary_true,
+        ) = evaluate_model(model_instance, val_loader)
     metrics = compute_metrics(
         binary_preds, binary_true, threshold=evalutaion_threshold, logger=logger
     )
@@ -248,7 +268,6 @@ def main(config_path):
     plot_histogram(binary_preds, binary_true, save_dir=fig_dir)
     plot_roc(binary_preds, binary_true, save_dir=fig_dir)
     plot_se_sp_vs_threshold(binary_preds, binary_true, save_dir=fig_dir)
-
 
     try:
         loss_history_path = os.path.join(
@@ -317,7 +336,8 @@ def main(config_path):
         palette=prediction_status_palette,
     )
     logger.info(
-        "Corner plot for true class 1 (Prediction_Status) saved to %s", class1_status_plot_path
+        "Corner plot for true class 1 (Prediction_Status) saved to %s",
+        class1_status_plot_path,
     )
 
     df_class0 = X_val_df[X_val_df["True_Class"] == 0]
@@ -334,9 +354,14 @@ def main(config_path):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Multi-task Training and Evaluation Script")
+    parser = argparse.ArgumentParser(
+        description="Multi-task Training and Evaluation Script"
+    )
     parser.add_argument(
-        "--config", type=str, default="src/config/config.yaml", help="Path to configuration file."
+        "--config",
+        type=str,
+        default="src/config/config.yaml",
+        help="Path to configuration file.",
     )
     args = parser.parse_args()
     main(args.config)

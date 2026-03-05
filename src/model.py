@@ -1,11 +1,9 @@
 import sys
-import os
 
 project_root = '/Users/irwin/Documents/GitHub/lisa-ml'
 sys.path.append(project_root)
-import torch
+
 import torch.nn as nn
-import torch.nn.functional as F
 from src import ndf
 
 

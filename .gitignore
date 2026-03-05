@@ -7,3 +7,31 @@ __pycache__/
 models/
 data/
 venv/
+
+# Common noise sources
+__pycache__/
+*.pyc
+*.ipynb_checkpoints
+*.log
+*.tmp
+.DS_Store
+
+# VSCode workspace files
+.vscode/
+
+# Data, output, models
+data/
+outputs/
+models/
+*.h5
+*.pth
+*.pt
+*.npy
+*.csv
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Cache directories
+.cache/
+*.egg-info/

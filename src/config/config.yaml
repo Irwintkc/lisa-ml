@@ -1,4 +1,4 @@
-name_of_run: Binary_Baseline_weighted_log_class1_100
+name_of_run: Binary_Baseline_weighted_log_class1_100_noduplicate
 model: "Binary" #Multi, Multi_L, NeuralForest, Binary
 
 data_params:
@@ -10,11 +10,11 @@ data_params:
     - FrequencyDerivative_log10
     - SNR
     - Eccentricity
-  #  - EclipticLatitude_sin
-  #  - Inclination_cos
-  # - Polarization
-  #  - EclipticLongitude
-  #  - InitialPhase
+    - EclipticLatitude_sin
+    - Inclination_cos
+    - Polarization
+    - EclipticLongitude
+    - InitialPhase
   n_samples_class0: 1
   n_samples_class1: 100
   ecc_0_only: False
@@ -39,5 +39,5 @@ ndf_params:
   jointly_training: False
 
 evaluation_threshold: 0.3
-test: True
+test: False
 
